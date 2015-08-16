@@ -14,6 +14,7 @@
       margin: 30px 0;
     }
 
+    /* 每段結尾的那一槓 */
     .section::before {
       content: "";
       height: 100%;
@@ -24,47 +25,6 @@
 
     .half {
       font-size: 16px;
-    }
-
-    .number {
-    }
-
-    .notation {
-      display:inline-block;
-      margin: 0;
-      /*width: 23%;*/
-    }
-
-    .beat-1-4 {
-      width: 5.75%;
-    }
-
-    .beat-2-4 {
-      width: 11.5%;
-    }
-
-    .beat-3-4 {
-      width: 17.25%;
-    }
-
-    .beat-4-4 {
-      width: 23%;
-    }
-
-    @media (min-width: 768px) {
-
-    }
-
-    @media (min-width: 992px) {
-      .notation {
-        /*width: 22%;*/
-      }
-    }
-
-    @media (min-width: 1200px) {
-      .notation {
-        /*width: 23%;*/
-      }
     }
 
     .beat {
@@ -78,20 +38,6 @@
       /*letter-spacing: 0px;*/
     }
 
-    .beat-1-4::before,
-    .beat-2-4::before {
-      content: "";
-      width: 100%;
-      height: 4px;
-      position: absolute;
-      left: 0px;
-      bottom: 0px;
-      border-top: 1px solid #000;
-    }
-
-    .beat-1-4::before {
-      border-bottom: 1px solid #000;
-    }
 
 /*
     1n 左右白各3px 數字9px，加總寬為 15px
@@ -108,6 +54,10 @@
       width: 14.5px;
       height: 5px;
       background-color: rgba(0,0,0,0.3);*/
+    }
+
+    .offset-1n {
+      left: 23px;
     }
 
     .offset-2n-1d {
@@ -183,7 +133,35 @@
       top: -8px;
     }
 
-    .arc-at-1-2 {
+    .arc-2n {
+      min-width: 34px;
+    }
+
+    .arc-2n-1d {
+      min-width: 42px;
+    }
+
+    .arc-3n {
+      min-width: 51px;
+    }
+
+    .arc-offset-1n {
+      left: -2px;
+    }
+
+    .arc-offset-2n {
+      left: 11px;
+    }
+
+    .arc-offset-2n-1d {
+      left: 21px;
+    }
+
+    .arc-offset-3n {
+      left: 26px;
+    }
+
+/*    .arc-at-1-2 {
       min-width: 34px;
       left: 0px;
     }
@@ -202,7 +180,7 @@
       min-width: 94px;
       top: -10px;
       left: 12px;
-    }
+    }*/
 
 
     .b-offset {
@@ -271,7 +249,7 @@
     }
 
     .under-offset-2n {
-      left: 18px;
+      left: 17px;
     }
 
     .under-offset-2n-1d {
@@ -293,49 +271,206 @@
     .under-offset-4n-1d {
       left: 56px;
     }
-
-/*    .under-start-at-begin {
-      left: 3px;
-    }
-
-    .under-start-at-hehe {
-      left: 5px;
-    }
-
-    .under-start-at-haha {
-      left: 26px;
-    }
-
-    .under-start-at-hoho {
-      left: 21px;
-    }
-
-    .under-start-at-keke {
-      left: 44px;
-    }
-
-    .under-start-at-first {
-      left: 13px;
-    }
-
-    .under-start-at-first-half {
-      left: 37px;
-    }*/
   </style>
 </head>
 <body>
-
-
   <div class="container">
     <h1 class="text-center">二泉映月</h1>
     <h3>1=G (1 5 弦)</h3>
+
     <div class="row">
-      <div class="col-md-3 col-lg-3">
+      <div class="col-md-6 col-lg-3">
+        <div class="section">
+          <div class="beat">0</div>
+          <div class="beat">0</div>
+          <div class="beat">
+            6
+            <span class="b-offset offset-1n">
+              <span class="under under-8th under-offset-1n under-1n"></span>
+              <span class="under under-16th under-offset-1n under-1n"></span>
+              <span class="under under-32th under-offset-1n under-1n"></span>
+            </span>
+          </div>
+          <div class="beat">
+            5643
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="section">
+          <div class="beat">2</div>
+          <div class="beat">—</div>
+          <div class="beat">
+            2<span class="half">.</span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+              <span class="under under-16th under-offset-2n-1d under-1n"></span>
+            </span>
+          </div>
+          <div class="beat">
+            112
+            <span class="t-offset offset-3n">
+              <span class="arc arc-offset-2n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="section">
+          <div class="beat">
+            3<span class="half">.</span>
+          </div>
+          <div class="beat">
+            5
+            <span class="b-offset offset-1n">
+              <span class="under under-8th under-offset-1n under-1n"></span>
+            </span>
+          </div>
+          <div class="beat">
+            6<span class="half"> </span>5
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat">
+            6561
+            <span class="t-offset offset-4n">
+              <span class="dot dot-offset-4n"></span>
+              <span class="arc arc-offset-1n arc-2n"></span>
+              <span class="arc arc-offset-3n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="section">
+          <div class="beat">
+            5<span class="half">.</span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+              <span class="under under-16th under-offset-2n-1d under-1n"></span>
+            </span>
+          </div>
+          <div class="beat">
+            553
+            <span class="t-offset offset-3n">
+              <span class="arc arc-offset-2n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat">
+            2<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat">
+            5612
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-3n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-3">
+        <div class="section">
+          <div class="beat">
+            3<span class="half">.</span>
+          </div>
+          <div class="beat">
+            5
+            <span class="b-offset offset-1n">
+              <span class="under under-8th under-offset-1n under-1n"></span>
+            </span>
+          </div>
+          <div class="beat">
+            2<span class="half">.</span>351
+            <span class="b-offset offset-4n-1d">
+              <span class="under under-8th under-offset-1n under-4n-1d"></span>
+              <span class="under under-16th under-offset-1n under-4n-1d"></span>
+              <span class="under under-32th under-offset-2n-1d under-1n"></span>
+            </span>
+          </div>
+          <div class="beat">
+            6235
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="section">
+          <div class="beat">1</div>
+          <div class="beat">—</div>
+          <div class="beat">
+            161
+            <span class="t-offset offset-3n">
+              <span class="dot dot-offset-1n"></span>
+              <span class="dot dot-offset-3n"></span>
+              <span class="arc arc-offset-1n arc-3n"></span>
+            </span>
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat">
+            332
+            <span class="t-offset offset-3n">
+              <span class="dot dot-offset-1n"></span>
+              <span class="dot dot-offset-2n"></span>
+              <span class="dot dot-offset-3n"></span>
+            </span>
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
         <div class="section">
           <div class="beat">
             1<span class="half">.</span>6
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -349,6 +484,7 @@
               <span class="dot dot-offset-2n-1d"></span>
               <span class="dot dot-offset-3n-1d"></span>
               <span class="dot dot-offset-4n-1d"></span>
+              <span class="arc arc-offset-2n-1d arc-2n"></span>
             </span>
             <span class="b-offset offset-4n-1d">
               <span class="under under-8th under-offset-1n under-4n-1d"></span>
@@ -375,6 +511,7 @@
               <span class="dot dot-offset-2n"></span>
               <span class="dot dot-offset-3n"></span>
               <span class="dot dot-offset-4n"></span>
+              <span class="arc arc-offset-2n arc-3n"></span>
             </span>
             <span class="b-offset offset-4n">
               <span class="under under-8th under-offset-1n under-4n"></span>
@@ -383,17 +520,17 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-lg-3">
+      <div class="col-md-6 col-lg-3">
         <div class="section">
           <div class="beat">5</div>
           <div class="beat">—</div>
           <div class="beat">
             5035
-            <div class="arc arc-at-3-4"></div>
             <span class="t-offset offset-4n">
               <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-3n"></span>
               <span class="dot dot-offset-4n"></span>
+              <span class="arc arc-offset-3n arc-2n"></span>
             </span>
             <span class="b-offset offset-4n">
               <span class="under under-8th under-offset-1n under-4n"></span>
@@ -402,14 +539,14 @@
           </div>
           <div class="beat">
             6561
-            <div class="arc arc-at-1-2"></div>
-            <div class="arc arc-at-3-4"></div>
             <span class="t-offset offset-4n">
               <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-2n"></span>
               <span class="dot dot-offset-3n"></span>
               <span class="dot dot-offset-4n"></span>
               <span class="dot dot-offset-4n double-eight"></span>
+              <span class="arc arc-offset-1n arc-2n"></span>
+              <span class="arc arc-offset-3n arc-2n"></span>
             </span>
             <span class="b-offset offset-4n">
               <span class="under under-8th under-offset-1n under-4n"></span>
@@ -418,13 +555,17 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-lg-3">
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-3">
         <div class="section">
           <div class="beat">
             5<span class="half">.</span>3
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -469,12 +610,13 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3 col-lg-3">
+      <div class="col-md-6 col-lg-3">
         <div class="section">
           <div class="beat">
             3<span class="half">.</span>5
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -483,12 +625,12 @@
           </div>
           <div class="beat">
             3<span class="half">.</span>435
-            <div class="arc arc-at-2-4"></div>
             <span class="t-offset offset-4n-1d">
               <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-2n-1d"></span>
               <span class="dot dot-offset-3n-1d"></span>
               <span class="dot dot-offset-4n-1d"></span>
+              <span class="arc arc-offset-2n-1d arc-3n"></span>
             </span>
             <span class="b-offset offset-4n-1d">
               <span class="under under-8th under-offset-1n under-4n-1d"></span>
@@ -498,7 +640,6 @@
           </div>
           <div class="beat">
             2<span class="half">.</span>321
-            <div class="arc arc-at-2-next-2"></div>
             <span class="t-offset offset-4n-1d">
               <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-2n-1d"></span>
@@ -523,15 +664,19 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="row">
       <div class="col-md-3 col-lg-3">
         <div class="section">
           <div class="beat">
-            1<span class="half">.</span>6
+            1
+            <span class="t-offset offset-1n">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat">
+            1<span class="half">.</span>2
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
+              <span class="dot dot-offset-2n-1d"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -539,35 +684,22 @@
             </span>
           </div>
           <div class="beat">
-            1<span class="half">.</span>233
-            <span class="t-offset offset-4n-1d">
-              <span class="dot dot-offset-1n"></span>
-              <span class="dot dot-offset-2n-1d"></span>
-              <span class="dot dot-offset-3n-1d"></span>
-              <span class="dot dot-offset-4n-1d"></span>
-            </span>
-            <span class="b-offset offset-4n-1d">
-              <span class="under under-8th under-offset-1n under-4n-1d"></span>
-              <span class="under under-16th under-offset-1n under-4n-1d"></span>
-              <span class="under under-32th under-offset-2n-1d under-1n"></span>
-            </span>
-          </div>
-          <div class="beat">
-            21<span class="half">.</span>1
-            <span class="t-offset offset-3n-1d">
+            351
+            <span class="t-offset offset-3n">
               <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-2n"></span>
-              <span class="dot dot-offset-3n-1d"></span>
+              <span class="dot dot-offset-3n"></span>
+              <span class="arc arc-offset-1n arc-2n"></span>
             </span>
-            <span class="b-offset offset-3n-1d">
-              <span class="under under-8th under-offset-1n under-3n-1d"></span>
-              <span class="under under-16th under-offset-2n under-2n-1d"></span>
-              <span class="under under-32th under-offset-3n-1d under-1n"></span>
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
             </span>
           </div>
           <div class="beat">
-            6123
+            2536
             <span class="t-offset offset-4n">
+              <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-2n"></span>
               <span class="dot dot-offset-3n"></span>
               <span class="dot dot-offset-4n"></span>
@@ -581,306 +713,32 @@
       </div>
       <div class="col-md-3 col-lg-3">
         <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
-        </div>
-      </div>
-      <div class="col-md-3 col-lg-3">
-        <div class="section">
-          <div class="notation">1</div>
-          <div class="notation">2</div>
-          <div class="notation">3</div>
-          <div class="notation">4</div>
+          <div class="beat">
+            5
+            <span class="t-offset offset-1n">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat">—</div>
+          <div class="beat">
+            5051
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat">
+            6561
+            <span class="t-offset offset-4n">
+              <span class="dot dot-offset-4n"></span>
+              <span class="arc arc-offset-1n arc-2n"></span>
+              <span class="arc arc-offset-3n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
         </div>
       </div>
     </div>
