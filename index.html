@@ -4,299 +4,7 @@
   <meta charset="UTF-8">
   <title>Numbered Musical Notation</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .section {
-      text-align: center;
-      font-size: 24px;
-      font-weight: 500;
-      font-family: monospace;
-      position: relative;
-      margin: 30px 0;
-    }
-
-    /* 每段結尾的那一槓 */
-    .section::before {
-      content: "";
-      height: 100%;
-      position: absolute;
-      right: -15px;
-      border-right: 1px solid #000;
-    }
-
-    .half {
-      font-size: 16px;
-    }
-
-    .beat {
-      width: 23%;
-      text-align: center;
-      display: inline-block;
-      position: relative;
-
-      margin: 0 -3px;
-
-      /*letter-spacing: 0px;*/
-    }
-
-    .beat-offset-5n-1d {
-      left: -13px;
-    }
-
-
-/*
-    1n 左右白各3px 數字9px，加總寬為 15px
-    1d 左右白個2.5px 點3px，加總寬為 8px
-*/
-    .t-offset {
-      position: absolute;
-      top: 2px;
-      /*bottom: 9px;
-      left: 16px;*/
-      /*left: 0px;*/
-
-    /*  display: inline-block;
-      width: 14.5px;
-      height: 5px;
-      background-color: rgba(0,0,0,0.3);*/
-    }
-
-    .offset-1n {
-      left: 23px;
-    }
-
-    .offset-1n-1d {
-      left: 18px;
-    }
-
-    .offset-2n-1d {
-      left: 11px;
-    }
-
-    .offset-3n {
-      left: 8px;
-    }
-
-    .offset-3n-1d {
-      left: 3px;
-    }
-
-    .offset-4n {
-      left: 1px;
-    }
-
-    .offset-4n-1d,
-    .offset-5n-1d {
-      left: 0px;
-    }
-
-    .dot {
-      display: inline-block;
-      min-width: 3px;
-      min-height: 3px;
-      background-color: #000;
-      border-radius: 50%;
-      position: absolute;
-      top: 2px;
-    }
-
-    .dot-offset-1n { /* OK */
-      left: 6px;
-    }
-
-    .dot-offset-2n { /* OK */
-      left: 21px;
-    }
-
-    .dot-offset-2n-1d { /* OK */
-      left: 29px;
-    }
-
-    .dot-offset-3n { /* OK */
-      left: 35px;
-    }
-
-    .dot-offset-3n-1d { /* OK */
-      left: 44px;
-    }
-
-    .dot-offset-4n { /* OK */
-      left: 49px;
-    }
-
-    .dot-offset-4n-1d { /* OK */
-      left: 59px;
-    }
-
-    .dot-offset-5n-1d {
-      left: 73px;
-    }
-
-    .double-eight {
-      top: -2px;
-    }
-
-    .arc {
-      min-height: 2em;
-      border: 1px solid #000;
-      display: inline-block;
-      padding: 0;
-      border-radius: 50%;
-      border-color: #000 transparent transparent;
-      position: absolute;
-      top: -8px;
-    }
-
-    .arc-2n {
-      min-width: 34px;
-    }
-
-    .arc-2n-1d {
-      min-width: 42px;
-    }
-
-    .arc-3n {
-      min-width: 51px;
-    }
-
-    .arc-4n {
-      min-width: 63px;
-    }
-
-    .arc-offset-1n {
-      left: -2px;
-    }
-
-    .arc-offset-2n {
-      left: 11px;
-    }
-
-    .arc-offset-2n-1d {
-      left: 21px;
-    }
-
-    .arc-offset-3n {
-      left: 26px;
-    }
-
-/*    .arc-at-1-2 {
-      min-width: 34px;
-      left: 0px;
-    }
-
-    .arc-at-3-4 {
-      min-width: 34px;
-      left: 26px;
-    }
-
-    .arc-at-2-4 {
-      min-width: 50px;
-      left: 16px;
-    }
-
-    .arc-at-2-next-2 {
-      min-width: 94px;
-      top: -10px;
-      left: 12px;
-    }*/
-
-
-    .b-offset {
-      position: absolute;
-      bottom: 2px;
-
-      /*bottom: 9px;
-      left: 16px;*/
-      /*left: 0px;*/
-
-      /*display: inline-block;
-      width: 14.5px;
-      height: 5px;
-      background-color: rgba(0,0,0,0.3);*/
-    }
-
-    .under {
-      position: absolute;
-      width: 10px;
-      height: 1px;
-      background-color: #000;
-    }
-
-    .under-8th {
-      bottom: 4px;
-    }
-
-    .under-16th {
-      bottom: 1px;
-    }
-
-    .under-32th {
-      bottom: -2px;
-    }
-
-    .under-64th {
-      bottom: -5px;
-    }
-
-    .under-1n {
-      width: 10px;
-    }
-
-    .under-2n {
-      width: 26px;
-    }
-
-    .under-2n-1d {
-      width: 34px;
-    }
-
-    .under-3n {
-      width: 40px;
-    }
-
-    .under-3n-1d {
-      width: 49px;
-    }
-
-    .under-4n {
-      width: 54px;
-    }
-
-    .under-4n-1d {
-      width: 62px;
-    }
-
-    .under-5n-1d {
-      width: 77px;
-    }
-
-    .under-offset-1n {
-      left: 2px;
-    }
-
-    .under-offset-2n {
-      left: 17px;
-    }
-
-    .under-offset-2n-1d {
-      left: 26px;
-    }
-
-    .under-offset-3n {
-      left: 32px;
-    }
-
-    .under-offset-3n-1d {
-      left: 41px;
-    }
-
-    .under-offset-4n {
-      left: 48px;
-    }
-
-    .under-offset-4n-1d {
-      left: 56px;
-    }
-  </style>
+  <link href="css/munu-note.css" rel="stylesheet">
 </head>
 <body>
   <div class="container">
@@ -390,7 +98,7 @@
           <div class="beat">
             5<span class="half">.</span>3
             <span class="t-offset offset-2n-1d">
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -400,7 +108,7 @@
           <div class="beat">
             553
             <span class="t-offset offset-3n">
-              <span class="arc arc-offset-2n arc-2n"></span>
+              <span class="arc arc-offset-2n arc-2n slide"></span>
             </span>
             <span class="b-offset offset-3n">
               <span class="under under-8th under-offset-1n under-3n"></span>
@@ -498,7 +206,7 @@
             1<span class="half">.</span>6
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -593,7 +301,7 @@
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-2n-1d"></span>
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -778,7 +486,7 @@
           <div class="beat">
             5<span class="half">.</span>3
             <span class="t-offset offset-2n-1d">
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -788,7 +496,7 @@
           <div class="beat">
             553
             <span class="t-offset offset-3n">
-              <span class="arc arc-offset-2n arc-2n"></span>
+              <span class="arc arc-offset-2n arc-2n slide"></span>
             </span>
             <span class="b-offset offset-3n">
               <span class="under under-8th under-offset-1n under-3n"></span>
@@ -851,7 +559,7 @@
             1<span class="half">.</span>6
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -960,7 +668,7 @@
               <span class="dot dot-offset-2n-1d"></span>
               <span class="dot dot-offset-3n-1d"></span>
               <span class="dot dot-offset-4n-1d"></span>
-              <span class="arc arc-offset-2n-1d arc-2n"></span>
+              <span class="arc arc-offset-2n-1d arc-2n slide"></span>
             </span>
             <span class="b-offset offset-4n-1d">
               <span class="under under-8th under-offset-1n under-4n-1d"></span>
@@ -991,7 +699,7 @@
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-2n-1d"></span>
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1096,7 +804,7 @@
             1<span class="half">.</span>6
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1261,7 +969,7 @@
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-2n-1d"></span>
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1316,7 +1024,7 @@
             3<span class="half">.</span>5
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1369,7 +1077,7 @@
             1<span class="half">.</span>6
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1438,7 +1146,7 @@
             <span class="t-offset offset-4n">
               <span class="dot dot-offset-3n"></span>
               <span class="arc arc-offset-1n arc-2n"></span>
-              <span class="arc arc-offset-3n arc-2n"></span>
+              <span class="arc arc-offset-3n arc-2n slide"></span>
             </span>
             <span class="b-offset offset-4n">
               <span class="under under-8th under-offset-1n under-4n"></span>
@@ -1452,7 +1160,7 @@
           <div class="beat">
             5<span class="half">.</span>3
             <span class="t-offset offset-2n-1d">
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1462,7 +1170,7 @@
           <div class="beat">
             553
             <span class="t-offset offset-3n">
-              <span class="arc arc-offset-2n arc-2n"></span>
+              <span class="arc arc-offset-2n arc-2n slide"></span>
             </span>
             <span class="b-offset offset-3n">
               <span class="under under-8th under-offset-1n under-3n"></span>
@@ -1521,7 +1229,7 @@
             <span class="t-offset offset-4n">
               <span class="dot dot-offset-3n"></span>
               <span class="arc arc-offset-1n arc-2n"></span>
-              <span class="arc arc-offset-3n arc-2n"></span>
+              <span class="arc arc-offset-3n arc-2n slide"></span>
             </span>
             <span class="b-offset offset-4n">
               <span class="under under-8th under-offset-1n under-4n"></span>
@@ -1535,7 +1243,7 @@
           <div class="beat">
             5<span class="half">.</span>3
             <span class="t-offset offset-2n-1d">
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1545,7 +1253,7 @@
           <div class="beat">
             553
             <span class="t-offset offset-3n">
-              <span class="arc arc-offset-2n arc-2n"></span>
+              <span class="arc arc-offset-2n arc-2n slide"></span>
             </span>
             <span class="b-offset offset-3n">
               <span class="under under-8th under-offset-1n under-3n"></span>
@@ -1737,6 +1445,9 @@
               <span class="dot dot-offset-1n double-eight"></span>
               <span class="dot dot-offset-2n-1d"></span>
               <span class="dot dot-offset-2n-1d double-eight"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
             </span>
           </div>
           <div class="beat">
@@ -1973,7 +1684,7 @@
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-2n-1d"></span>
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -2047,7 +1758,7 @@
               <span class="dot dot-offset-4n-1d"></span>
               <span class="dot dot-offset-2n-1d double-eight"></span>
               <span class="dot dot-offset-4n-1d double-eight"></span>
-              <span class="arc arc-offset-2n-1d arc-2n"></span>
+              <span class="arc arc-offset-2n-1d arc-2n slide"></span>
             </span>
             <span class="b-offset offset-4n-1d">
               <span class="under under-8th under-offset-1n under-4n-1d"></span>
@@ -2451,7 +2162,7 @@
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-2n-1d"></span>
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
               <span class="b-offset offset-2n-1d">
                 <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -2601,7 +2312,7 @@
             1<span class="half">.</span>6
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -2651,7 +2362,7 @@
             <span class="t-offset offset-2n-1d">
               <span class="dot dot-offset-1n"></span>
               <span class="dot dot-offset-2n-1d"></span>
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d slide"></span>
             </span>
             <span class="b-offset offset-2n-1d">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
