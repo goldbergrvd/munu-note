@@ -174,6 +174,93 @@
 .decorate-offset-2n-depend-1n .dot-offset-1n { left: 3px; }
 .decorate-offset-2n-depend-1n .dot-offset-2n { left: 10px; }
 
+.down-decorate,
+.up-decorate {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 50%;
+  position: absolute;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.down-decorate {
+  border-color: transparent #000 transparent transparent;
+  top: 2px;
+}
+.down-decorate::before,
+.down-decorate::after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  background-color: #000;
+}
+.down-decorate::before {
+  height: 1px;
+  width: 4px;
+  top: 6px;
+  left: 7px;
+  -webkit-transform: rotate(-30deg);
+  -moz-transform: rotate(-30deg);
+  -o-transform: rotate(-30deg);
+  transform: rotate(-30deg);
+}
+.down-decorate::after {
+  height: 4px;
+  width: 1px;
+  top: 4px;
+  left: 6px;
+  -webkit-transform: rotate(-20deg);
+  -moz-transform: rotate(-20deg);
+  -o-transform: rotate(-20deg);
+  transform: rotate(-20deg);
+}
+.down-decorate-offset-1n { left: -8px; }
+.down-decorate-offset-2n { left: 7px; }
+.down-decorate-offset-2n-1d { left: 16px; }
+.down-decorate-offset-3n { left: 21px; }
+.down-decorate-offset-3n-1d { left: 30px; }
+.down-decorate-offset-4n { left: 36px; }
+.down-decorate-offset-4n-1d { left: 44px; }
+
+.up-decorate {
+  border-color: #000 transparent transparent transparent;
+  top: 8px;
+}
+.up-decorate::before,
+.up-decorate::after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  background-color: #000;
+  -webkit-transform: rotate(-25deg);
+  -moz-transform: rotate(-25deg);
+  -o-transform: rotate(-25deg);
+  transform: rotate(-25deg);
+}
+.up-decorate::before {
+  height: 1px;
+  width: 4px;
+  top: 0.5px;
+  left: 4px;
+}
+.up-decorate::after {
+  height: 4px;
+  width: 1px;
+  top: -3px;
+  left: 6.5px;
+}
+.up-decorate-offset-1n { left: -4px; }
+.up-decorate-offset-2n { left: 12px; }
+.up-decorate-offset-2n-1d { left: 21px; }
+.up-decorate-offset-3n { left: 27px; }
+.up-decorate-offset-4n-1d { left: 50px; }
+
 
 .b-offset {
   position: absolute;
