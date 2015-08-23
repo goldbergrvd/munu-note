@@ -193,6 +193,7 @@
   border-color: transparent #000 transparent transparent;
   top: 2px;
 }
+.down-decorate-double-top { top: -9px; }
 .down-decorate::before,
 .down-decorate::after {
   content: "";
@@ -261,6 +262,30 @@
 .up-decorate-offset-3n { left: 27px; }
 .up-decorate-offset-4n-1d { left: 50px; }
 
+.accidental {
+  position: absolute;
+  top: -18px;
+}
+.accidental-offset-1n { left: -4px; }
+.accidental-offset-2n { left: 9px; }
+.accidental-offset-2n-1d { left: 20px; }
+.accidental-offset-4n { left: 40px; }
+.sharp::before,
+.flat::before,
+.natural::before {
+  font-size: 12px;
+  font-weight: bold;
+}
+.sharp::before { content: "♯"; }
+.natural::before { content: "♮"; }
+.flat::before { content: "♭"; }
+
+.decorate .accidental { top: -4px; }
+.decorate .sharp::before,
+.decorate .flat::before,
+.decorate .natural::before {
+  font-size: 8px;
+}
 
 .b-offset {
   position: absolute;
@@ -292,3 +317,18 @@
 .under-offset-3n-1d { left: 41px; }
 .under-offset-4n { left: 48px; }
 .under-offset-4n-1d { left: 56px; }
+
+.shake {
+  position: absolute;
+  top: -25px;
+  -webkit-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  transform: rotate(15deg);
+}
+.shake-offset-1n { left: 10px; }
+.shake::before {
+  content: "///";
+  font-size: 12px;
+  letter-spacing: -4px;
+}
