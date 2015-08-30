@@ -7,11 +7,32 @@
   <link href="css/munu-note.css" rel="stylesheet">
 </head>
 <body>
+  <div id="player">
+    <audio src="二泉映月.mp3" loop></audio>
+    <span class="player-btn stop glyphicon glyphicon-stop"></span>
+    <span class="player-btn play-pause glyphicon glyphicon-play"></span>
+    <span class="player-btn repeat repeat-off glyphicon glyphicon-refresh"></span>
+    <span class="player-btn volume glyphicon glyphicon-volume-up"></span>
+    <div class="volume-bar">
+      <div class="volume1"></div>
+      <div class="volume2"></div>
+      <div class="volume3"></div>
+      <div class="volume4"></div>
+      <div class="volume5"></div>
+    </div>
+    <span class="player-curr-time"></span>
+    <span class="player-time-slash">/</span>
+    <span class="player-total-time"></span>
+    <div class="player-timebar"></div>
+    <div class="player-cursor"></div>
+    <div class="player-cursor-area"></div>
+  </div>
+
   <div class="container">
     <h1 class="text-center">二泉映月</h1>
     <h3>1=G (1 5 弦)</h3>
 
-    <div class="row">
+    <div class="row" data-start-time="00:00" data-end-time="00:31">
       <div class="col-md-6 col-lg-3">
         <div class="section">
           <div class="beat">0</div>
@@ -170,7 +191,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" data-start-time="00:31" data-end-time="01:02">
       <div class="col-md-6 col-lg-3">
         <div class="section">
           <div class="beat">
@@ -363,7 +384,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" data-start-time="01:02" data-end-time="01:35">
       <div class="col-md-6 col-lg-3">
         <div class="section">
           <div class="beat">
@@ -600,7 +621,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" data-start-time="01:35" data-end-time="02:07">
       <div class="col-md-6 col-lg-3">
         <div class="section">
           <div class="beat">
@@ -3018,5 +3039,6 @@
 
   <script src="js/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script src="js/munu-note.js"></script>
 </body>
 </html>
