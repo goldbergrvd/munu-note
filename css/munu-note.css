@@ -140,6 +140,9 @@
 }
 .beat-offset-5n-1d { left: -13px; }
 
+.beat-2 {
+  width: 37%;
+}
 
 /*
 1n 左右白各3px 數字9px，加總寬為 15px
@@ -152,6 +155,7 @@
 
 .offset-1n { left: 23px; }
 .offset-1n-1d { left: 18px; }
+.offset-2n { left: 15px; }
 .offset-2n-1d { left: 11px; }
 .offset-3n { left: 8px; }
 .offset-3n-1d { left: 3px; }

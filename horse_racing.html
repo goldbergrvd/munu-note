@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>賽馬</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/munu-note.css" rel="stylesheet">
+</head>
+<body>
+  <div id="player">
+    <audio src="賽馬.mp3" loop></audio>
+    <span class="player-btn stop glyphicon glyphicon-stop"></span>
+    <span class="player-btn play-pause glyphicon glyphicon-play"></span>
+    <span class="player-btn repeat repeat-off glyphicon glyphicon-refresh"></span>
+    <span class="player-btn volume glyphicon glyphicon-volume-up"></span>
+    <div class="volume-bar">
+      <div class="volume1"></div>
+      <div class="volume2"></div>
+      <div class="volume3"></div>
+      <div class="volume4"></div>
+      <div class="volume5"></div>
+    </div>
+    <span class="player-curr-time"></span>
+    <span class="player-time-slash">/</span>
+    <span class="player-total-time"></span>
+    <div class="player-timebar"></div>
+    <div class="player-cursor"></div>
+    <div class="player-cursor-area"></div>
+  </div>
+
+  <div class="container">
+    <h1 class="text-center">賽馬</h1>
+    <h3>1=F (6 3 弦) 2/4</h3>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+          </div>
+          <div class="beat beat-2">
+            35
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+          </div>
+          <div class="beat beat-2">
+            35
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+          </div>
+          <div class="beat beat-2">
+            35
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+          </div>
+          <div class="beat beat-2">
+            35
+            <span class="t-offset offset-2n">
+              <span class="arc arc-offset-1n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6535
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6535
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6535
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6535
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="decorate decorate-offset-1n-depend-2n-1d">5</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="decorate decorate-offset-1n-depend-2n-1d">5</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="decorate decorate-offset-1n-depend-2n-1d">5</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="decorate decorate-offset-1n-depend-2n-1d">5</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>6
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+              <span class="dot dot-offset-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            3<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            5<span class="half"> </span>3
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2321
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            2321
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2321
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            2321
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>6
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+              <span class="dot dot-offset-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            3<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            5<span class="half"> </span>3
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2321
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            2321
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2321
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            2321
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2<span class="half">.</span>
+          </div>
+          <div class="beat beat-2">
+            61
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2<span class="half">.</span>
+          </div>
+          <div class="beat beat-2">
+            61
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2<span class="half">.</span>
+          </div>
+          <div class="beat beat-2">
+            61
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2<span class="half">.</span>
+          </div>
+          <div class="beat beat-2">
+            61
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2321
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            2321
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2321
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            2321
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="decorate decorate-offset-1n-depend-2n-1d">1</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            2<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="decorate decorate-offset-1n-depend-2n-1d">1</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="decorate decorate-offset-1n-depend-2n-1d">1</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            2<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="decorate decorate-offset-1n-depend-2n-1d">1</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6
+            <span class="b-offset offset-1n">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">6</div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">5</div>
+          <div class="beat beat-2">3</div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">2</div>
+          <div class="beat beat-2">5</div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">3</div>
+          <div class="beat beat-2">1</div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6
+            <span class="b-offset offset-1n">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">6</div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">5</div>
+          <div class="beat beat-2">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">2</div>
+          <div class="beat beat-2">5</div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">3</div>
+          <div class="beat beat-2">1</div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+            <span class="b-offset offset-1n-1d">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            12
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+            <span class="b-offset offset-1n-1d">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            12
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+            <span class="b-offset offset-1n-1d">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            12
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+            <span class="b-offset offset-1n-1d">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            12
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6212
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6212
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6212
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6212
+            <span class="t-offset offset-4n">
+              <span class="arc arc-offset-1n arc-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6
+            <span class="b-offset offset-1n">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>6
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+              <span class="dot dot-offset-1n"></span>
+              <span class="dot dot-offset-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6
+            <span class="b-offset offset-1n">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">—</div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">3</div>
+          <div class="beat beat-2">
+            6<span class="half">.</span>1
+            <span class="t-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="arc arc-offsest-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+              <span class="under under-16th under-offset-2n-1d under-1n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            5<span class="half">.</span>
+          </div>
+          <div class="beat beat-2">
+            3
+            <span class="b-offset offset-1n">
+              <span class="under under-8th under-offset-1n under-1n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            5<span class="half"> </span>6
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1
+            <span class="t-offset offset-1n">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">6</div>
+          <div class="beat beat-2">—</div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">3</div>
+          <div class="beat beat-2">
+            6<span class="half">.</span>1
+            <span class="t-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="arc arc-offsest-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+              <span class="under under-16th under-offset-2n-1d under-1n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">5</div>
+          <div class="beat beat-2">
+            5<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>5
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">3</div>
+          <div class="beat beat-2">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">5</div>
+          <div class="beat beat-2">
+            6<span class="half">.</span>1
+            <span class="t-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="arc arc-offsest-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+              <span class="under under-16th under-offset-2n-1d under-1n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            1<span class="half">.</span>
+          </div>
+          <div class="beat beat-2">
+            6
+            <span class="b-offset offset-1n">
+              <span class="under under-8th under-offset-1n under-1n"></span>
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>5
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">3</div>
+          <div class="beat beat-2">
+            3<span class="half"> </span>2
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            1<span class="half">.</span>2
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+              <span class="under under-16th under-offset-2n-1d under-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            3<span class="half"> </span>5
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">6</div>
+          <div class="beat beat-2">
+            6
+            <span class="b-offset offset-1n">
+              <spna class="dot dot-offset-1n"></spna>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2<span class="half"> </span>3
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">1</div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6
+            <span class="b-offset offset-1n">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">—</div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            333
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>1
+            <span class="t-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            555
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            5<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            556
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            121
+            <sapn class="t-offset offset-3n">
+              <span class="dot dot-offset-1n"></span>
+              <span class="dot dot-offset-2n"></span>
+              <span class="dot dot-offset-3n"></span>
+            </sapn>
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            666
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            333
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>1
+            <span class="t-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            555
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            5<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            223
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>5
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            335
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            3<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            555
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>1
+            <span class="t-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            111
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            223
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>5
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            335
+            <span class="b-offset offset-3n">
+              <span class="under under-8th under-offset-1n under-3n"></span>
+              <span class="under under-16th under-offset-2n under-2n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            3<span class="half"> </span>2
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            1612
+            <span class="b-offset offset-4n">
+              <span class="dot dot-offset-2n"></span>
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            3235
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6561
+            <span class="t-offset offset-4n">
+              <span class="dot dot-offset-4n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            5653
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2321
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            2161
+            <span class="b-offset offset-4n">
+              <span class="dot dot-offset-3n"></span>
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6
+            <span class="b-offset offset-1n">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">6</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            0<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            0<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            0<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            7<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-1n"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-1n"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            0<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            0<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            0<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            7<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-1n"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-1n"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            0<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            0<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            0<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            7<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-1n"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-1n"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            0<span class="half"> </span>5
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            3<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            1<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div><div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            2<span class="half"> </span>2
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            3<span class="half"> </span>1
+            <span class="t-offset offset-2n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+              <span class="finger tip-offset-2n-1d tip-2-level">＋</span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+            <span class="t-offset offset-1n-1d">
+              <span class="finger tip-offset-1n tip-2-level">＋</span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            35
+            <span class="t-offset offset-2n">
+              <span class="arc arc-offset-1n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+          </div>
+          <div class="beat beat-2">
+            35
+            <span class="t-offset offset-2n">
+              <span class="arc arc-offset-1n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+            <span class="b-offset offset-1n-1d">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            35
+            <span class="t-offset offset-2n">
+              <span class="arc arc-offset-1n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+          </div>
+          <div class="beat beat-2">
+            35
+            <span class="t-offset offset-2n">
+              <span class="arc arc-offset-1n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+            <span class="b-offset offset-1n-1d">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            12
+            <span class="t-offset offset-2n">
+              <span class="arc arc-offset-1n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            3235
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6165
+            <span class="t-offset offset-4n">
+              <span class="dot dot-offset-2n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            3235
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6165
+            <span class="t-offset offset-4n">
+              <span class="dot dot-offset-2n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            3532
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>3
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+            <span class="b-offset offset-1n-1d">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            12
+            <span class="t-offset offset-2n">
+              <span class="arc arc-offset-1n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            3235
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6165
+            <span class="t-offset offset-4n">
+              <span class="dot dot-offset-2n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            3235
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6165
+            <span class="t-offset offset-4n">
+              <span class="dot dot-offset-2n"></span>
+            </span>
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            3532
+            <span class="b-offset offset-4n">
+              <span class="under under-8th under-offset-1n under-4n"></span>
+              <span class="under under-16th under-offset-1n under-4n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            1<span class="half"> </span>3
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            6<span class="half">.</span>
+            <span class="b-offset offset-1n-1d">
+              <span class="dot dot-offset-1n"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            36
+            <span class="t-offset offset-2n">
+              <span class="arc arc-offset-1n arc-2n"></span>
+            </span>
+            <span class="b-offset offset-2n">
+              <span class="under under-8th under-offset-1n under-2n"></span>
+              <span class="under under-16th under-offset-1n under-2n"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            1<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="dot dot-offset-1n"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            1<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="dot dot-offset-1n"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            1<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="dot dot-offset-1n"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="dot dot-offset-2n-1d"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <div class="section">
+          <div class="beat beat-2">
+            1<span class="half"> </span>6
+            <span class="t-offset offset-2n-1d">
+              <span class="dot dot-offset-1n"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+          <div class="beat beat-2">
+            6<span class="half"> </span>3
+            <span class="t-offset offset-2n-1d">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
+            <span class="b-offset offset-2n-1d">
+              <span class="under under-8th under-offset-1n under-2n-1d"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/munu-note.js"></script>
+</body>
+</html>
