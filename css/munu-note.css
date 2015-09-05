@@ -138,7 +138,7 @@
   position: relative;
   margin: 0 -3px;
 }
-.beat-offset-5n-1d { left: -13px; }
+.beat-5n-1d { left: -13px; }
 
 .beat-2 {
   width: 37%;
@@ -148,20 +148,36 @@
 1n 左右白各3px 數字9px，加總寬為 15px
 1d 左右白個2.5px 點3px，加總寬為 8px
 */
-.t-offset {
+.beat-top {
   position: absolute;
   top: 2px;
 }
 
-.offset-1n { left: 23px; }
-.offset-1n-1d { left: 18px; }
-.offset-2n { left: 15px; }
-.offset-2n-1d { left: 11px; }
-.offset-3n { left: 8px; }
-.offset-3n-1d { left: 3px; }
-.offset-4n { left: 1px; }
-.offset-4n-1d,
-.offset-5n-1d { left: 0px; }
+.beat-1n > .beat-top,
+.beat-1n > .beat-bottom { left: 23px; }
+
+.beat-1n-1d > .beat-top,
+.beat-1n-1d > .beat-bottom { left: 18px; }
+
+.beat-2n > .beat-top,
+.beat-2n > .beat-bottom { left: 15px; }
+
+.beat-2n-1d > .beat-top,
+.beat-2n-1d > .beat-bottom { left: 11px; }
+
+.beat-3n > .beat-top,
+.beat-3n > .beat-bottom { left: 8px; }
+
+.beat-3n-1d > .beat-top,
+.beat-3n-1d > .beat-bottom { left: 3px; }
+
+.beat-4n > .beat-top,
+.beat-4n > .beat-bottom { left: 1px; }
+
+.beat-4n-1d > .beat-top,
+.beat-4n-1d > .beat-bottom,
+.beat-5n-1d > .beat-top,
+.beat-5n-1d > .beat-bottom { left: 0px; }
 
 .dot {
   display: inline-block;
@@ -402,7 +418,7 @@
   font-size: 8px;
 }
 
-.b-offset {
+.beat-bottom {
   position: absolute;
   bottom: 2px;
 }
