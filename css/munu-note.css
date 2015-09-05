@@ -219,6 +219,7 @@
 .arc-offset-2n { left: 11px; }
 .arc-offset-2n-1d { left: 21px; }
 .arc-offset-3n { left: 26px; }
+.arc-offset-3n-1d { left: 36px; }
 
 .slide::before,
 .slide::after {

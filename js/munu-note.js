@@ -25,6 +25,58 @@
     return (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec ;
   }
 
+  (function () {
+    var arcRegex = /(\d)n(?:-(\d)d)?/,
+        beatRegex = /.* beat-(\dn(?:-\dd)?)/,
+        toInt = function (e) { return e === undefined ? 0 : parseInt(e); },
+        beatLeft = {
+          '1n': 25,
+          '1n-1d': 18,
+          '2n': 15,
+          '2n-1d': 11,
+          '3n': 10,
+          '3n-1d': 5,
+          '4n': 2
+        },
+        beatRight = {
+          '1n': 25,
+          '1n-1d': 18,
+          '2n': 15,
+          '2n-1d': 11,
+          '3n': 10,
+          '3n-1d': 5,
+          '4n': 2,
+          '4n-1d': -8
+        };
+
+    $('.arc[data-arc-from]').each(function (i, e) {
+      var from = arcRegex.exec(e.dataset.arcFrom).slice(1).map(toInt),
+          to = arcRegex.exec(e.dataset.arcTo).slice(1).map(toInt),
+          crossCount = parseInt(e.dataset.arcCross),
+          fromBeatN = beatRegex.exec(e.parentNode.parentNode.className)[1],
+          toBeatN = (function () {
+                      var resultBeat = e.parentNode.parentNode,
+                          crossTemp = crossCount;
+                      while (crossTemp > 0) {
+                        resultBeat = resultBeat.nextElementSibling;
+                        crossTemp--;
+                      }
+                      return beatRegex.exec(resultBeat.className)[1];
+                    } ()),
+          beatWidth = e.parentNode.parentNode.clientWidth,
+          minWidth = from[0] * 15 + from[1] * 8 + beatRight[fromBeatN] +
+                     crossCount * 10 + (crossCount - 1) * beatWidth +
+                     beatLeft[toBeatN] + to[0] * 15 + to[1] * 8;
+      $(e).css({
+        minWidth: minWidth,
+        top: (function () {
+               return minWidth > 60 ? -10 : -8;
+             }())
+      });
+
+    });
+  }());
+
   $(audio)
     .on('loadeddata', function (e) {
       $currTime.text(formatSec(this.currentTime));
