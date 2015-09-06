@@ -574,3 +574,12 @@
   -o-transform: rotate(30deg);
   transform: rotate(30deg);
 }
+
+.staccato {
+  border-width: 8px 3px;
+  border-style: solid;
+  border-color: #000 transparent transparent;
+  margin-left: 2px;
+  display: inline-block;
+  position: absolute;
+}
