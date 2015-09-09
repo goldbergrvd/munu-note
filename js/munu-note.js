@@ -10,14 +10,17 @@
       $totalTime = $('#player > .player-total-time'),
       $timebar = $('#player > .player-timebar'),
       $playerCursor = $('#player > .player-cursor'),
-      $playerCursorArea = $('#player > .player-cursor-area'),
-      $rows = $('.row'),
+      $playerCursorArea = $('#player > .player-cursor-area');
+
+  var $rows = $('.row'),
       currRowIndex = 0,
       prevVolumeLevel = 1,
       currPosHtml = '<div class="curr-pos">' +
                       '<span class="glyphicon glyphicon-chevron-right"></span>' +
                       '<span class="glyphicon glyphicon-chevron-left"></span>' +
                     '</div>';
+
+  var $metronome = $('#metronome');
 
   function formatSec(secValue) {
     var min = parseInt(secValue / 60),
@@ -76,6 +79,17 @@
 
     });
   }());
+
+  $metronome.find('.metronome-toggle').on('click', function (e) {
+    $toggle = $(this);
+    $toggle.toggleClass('off');
+
+    if ($toggle.hasClass('off')) {
+      $metronome.css('left', -300);
+    } else {
+      $metronome.css('left', 0);
+    }
+  });
 
   $(audio)
     .on('loadeddata', function (e) {
