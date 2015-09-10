@@ -91,6 +91,10 @@
     }
   });
 
+  $metronome.find('.bpm-slide').on('input', function (e) {
+    $metronome.find('.tempo').text(this.value);
+  });
+
   $(audio)
     .on('loadeddata', function (e) {
       $currTime.text(formatSec(this.currentTime));

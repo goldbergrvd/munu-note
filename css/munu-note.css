@@ -89,64 +89,6 @@
 }
 
 
-#metronome {
-  width: 300px;
-  height: 500px;
-  position: fixed;
-  top: 50px;
-  left: -300px;
-  background-color: rgba(0, 0, 0, 1);
-  -webkit-border-radius: 0 20px 20px 0;
-  -moz-border-radius: 0 20px 20px 0;
-  -o-border-radius: 0 20px 20px 0;
-  border-radius: 0 20px 20px 0;
-  -webkit-transition: left 1s;
-  -moz-transition: left 1s;
-  -o-transition: left 1s;
-  transition: left 1s;
-
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-#metronome .metronome-toggle {
-  width: 30px;
-  height: 60px;
-  position: absolute;
-  top: 20px;
-  right: -30px;
-  text-align: center;
-  line-height: 33px;
-  background-color: rgba(0, 0, 0, 1);
-  color: rgba(255, 255, 255, 1);
-  font-family: 微軟正黑體;
-  -webkit-writing-mode: vertical-rl;
-  writing-mode: vertical-rl;
-  cursor: pointer;
-}
-
-#metronome .tempo {
-  width: 250px;
-  height: 250px;
-  margin: 25px auto;
-  border-top: 7px solid rgba(0, 255, 255, 0.8);
-  border-right: 7px solid rgba(255, 153, 51, 0.8);
-  border-bottom: 7px solid rgba(255, 0, 0, 0.8);
-  border-left: 7px solid rgba(255, 0, 255, 0.8);
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -o-border-radius: 50%;
-  border-radius: 50%;
-  color: rgba(255, 255, 255, 1);
-  font-size: 100px;
-  text-align: center;
-  line-height: 236px;
-}
-
-
 .container {
   margin-bottom: 50px;
 }
