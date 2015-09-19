@@ -80,20 +80,85 @@
     });
   }());
 
-  $metronome.find('.metronome-toggle').on('click', function (e) {
-    $toggle = $(this);
-    $toggle.toggleClass('off');
+  (function () {
+    var a1 = new Audio('sound/beat1.mp3');
+    var a2 = new Audio('sound/beat2.mp3');
+    var count = -8;
+    var bpm = 80;
+    var timer;
+    function exec() {
+      if (count % 2 === 0) {
+        a1.currentTime = 0;
+        a1.play();
+        // count = 0;
+      } else {
+        a2.currentTime = 0;
+        a2.play();
+      }
 
-    if ($toggle.hasClass('off')) {
-      $metronome.css('left', -300);
-    } else {
-      $metronome.css('left', 0);
+      if (count < 0) {
+        window.scrollTo(0, 0);
+      }
+
+      if (count % 12 == 0) {
+        currRowIndex = count / 12;
+        var $currRow = $($rows.get(currRowIndex));
+        if ($currRow.length === 0) {
+          $($rows.get($rows.length - 1)).find('.curr-pos').remove();
+          count = -8;
+        } else {
+          if ($currRow.prev().hasClass('row')) {
+            $currRow.prev().find('.curr-pos').remove();
+          }
+          $currRow.prepend(currPosHtml);
+          var currPosEle = document.querySelector('.curr-pos'),
+              screenHeight = document.documentElement.clientHeight,
+              currPosEleTop = currPosEle.getBoundingClientRect().top
+              diff = screenHeight - currPosEleTop;
+          if (diff < 200 || diff > 800) {
+            window.scrollTo(0, $('.curr-pos').parent().position().top - 200);
+          }
+        }
+      }
+
+      count++;
+      timer = setTimeout(exec, 60 / bpm * 1000);
     }
-  });
 
-  $metronome.find('.bpm-slide').on('input', function (e) {
-    $metronome.find('.tempo').text(this.value);
-  });
+    $metronome.find('.bpm-slide').on('input', function (e) {
+      $metronome.find('.tempo').text(this.value);
+      bpm = parseInt(this.value);
+    });
+
+    $metronome.find('.tempo-trigger').on('click', function (e) {
+      $(this).find('span').toggleClass('glyphicon-play');
+      $(this).find('span').toggleClass('glyphicon-stop');
+      if (!timer) {
+        timer = setTimeout(exec, 0);
+      } else {
+        clearTimeout(timer);
+        timer = undefined;
+        count = -8;
+        $('.curr-pos').remove();
+      }
+    });
+
+    $metronome.find('.metronome-toggle').on('click', function (e) {
+      $toggle = $(this);
+      $toggle.toggleClass('off');
+
+      if ($toggle.hasClass('off')) {
+        $metronome.css('left', -300);
+      } else {
+        $metronome.css('left', 0);
+      }
+    });
+
+    $metronome.find('#tempo-sound').on('change', function (e) {
+      a1 = new Audio('sound/' + this.value + '1.mp3');
+      a2 = new Audio('sound/' + this.value + '2.mp3');
+    });
+  } ());
 
   $(audio)
     .on('loadeddata', function (e) {

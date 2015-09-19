@@ -584,3 +584,12 @@
   display: inline-block;
   position: absolute;
 }
+
+input.form-control {
+  height: 28px;
+  text-align: center;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+}

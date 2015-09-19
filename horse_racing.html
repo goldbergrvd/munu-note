@@ -32,6 +32,31 @@
     <span class="metronome-toggle off">節拍器</span>
     <div class="tempo">80</div>
     <input class="bpm-slide" type="range" min="50" max="200" value="80" />
+    <div class="time-signature">
+      <div class="each-section">
+        <div class="up"><span class="glyphicon glyphicon-chevron-up"></span></div>
+        2
+        <div class="down"><span class="glyphicon glyphicon-chevron-down"></span></div>
+      </div>
+      <span>/</span>
+      <div class="note-count">
+        <div class="up"><span class="glyphicon glyphicon-chevron-up"></span></div>
+        4
+        <div class="down"><span class="glyphicon glyphicon-chevron-down"></span></div>
+      </div>
+    </div>
+    <div class="tempo-trigger">
+      <span class="glyphicon glyphicon-play"></span>
+    </div>
+    <select id="tempo-sound">
+      <option value="beat">sound1</option>
+      <option value="da">sound2</option>
+      <option value="ka">sound3</option>
+      <option value="ping">sound4</option>
+      <option value="seiko">sound5</option>
+      <option value="stick">sound6</option>
+      <option value="pon">sound7</option>
+    </select>
   </div>
 
   <div class="container">
@@ -98,15 +123,14 @@
       </div>
       <div class="col-lg-2">
         <div class="section">
-          <div class="beat beat-2">
+          <div class="beat beat-2 beat-1n-1d">
             6<span class="half">.</span>
+            <span class="beat-top">
+              <span class="arc arc-offset-1n" data-arc-from="1n-1d" data-arc-cross="1" data-arc-to="2n"></span>
+            </span>
           </div>
           <div class="beat beat-2 beat-2n">
             35
-            <span class="beat-top">
-              <span class="arc arc-offset-1n arc-2n"></span>
-              <span class="pull-bow tip-offset-1n tip-3-level"></span>
-            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n"></span>
               <span class="under under-16th under-offset-1n under-2n"></span>
@@ -120,7 +144,7 @@
             6535
             <span class="beat-top">
               <span class="arc arc-offset-1n arc-4n"></span>
-              <span class="push-bow tip-offset-1n tip-3-level"></span>
+              <span class="pull-bow tip-offset-1n tip-3-level"></span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-4n"></span>
@@ -174,7 +198,7 @@
               <span class="staccato tip-offset-1n tip-1-level"></span>
               <span class="staccato tip-offset-2n-1d tip-1-level"></span>
               <span class="decorate decorate-offset-1n-before-2n-1d">5</span>
-              <span class="push-bow tip-offset-1n tip-4-level"></span>
+              <span class="pull-bow tip-offset-1n tip-4-level"></span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -225,7 +249,7 @@
             6<span class="half"> </span>3
             <span class="beat-top">
               <span class="arc arc-offset-1n arc-2n-1d"></span>
-              <span class="push-bow tip-offset-1n tip-3-level"></span>
+              <span class="pull-bow tip-offset-1n tip-3-level"></span>
               <span class="finger tip-offset-2n-1d tip-4-level">三</span>
               <span class="finger tip-offset-2n-1d tip-7-level">內</span>
             </span>
@@ -259,6 +283,9 @@
           </div>
           <div class="beat beat-2 beat-2n-1d">
             5<span class="half"> </span>3
+            <span class="beat-top">
+              <span class="finger tip-offset-2n-1d tip-3-level">０</span>
+            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
             </span>
@@ -271,7 +298,7 @@
             2321
             <span class="beat-top">
               <span class="arc arc-offset-1n arc-4n"></span>
-              <span class="push-bow tip-offset-1n tip-3-level"></span>
+              <span class="pull-bow tip-offset-1n tip-3-level"></span>
               <span class="finger tip-offset-2n tip-4-level">三</span>
             </span>
             <span class="beat-bottom">
@@ -297,6 +324,7 @@
             2321
             <span class="beat-top">
               <span class="arc arc-offset-1n arc-4n"></span>
+              <span class="finger tip-offset-2n tip-4-level">三</span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-4n"></span>
@@ -324,7 +352,7 @@
             6<span class="half"> </span>3
             <span class="beat-top">
               <span class="arc arc-offset-1n arc-2n-1d"></span>
-              <span class="push-bow tip-offset-1n tip-3-level"></span>
+              <span class="pull-bow tip-offset-1n tip-3-level"></span>
               <span class="finger tip-offset-2n-1d tip-4-level">三</span>
               <span class="finger tip-offset-2n-1d tip-7-level">內</span>
             </span>
@@ -367,7 +395,7 @@
             2321
             <span class="beat-top">
               <span class="arc arc-offset-1n arc-4n"></span>
-              <span class="push-bow tip-offset-1n tip-3-level"></span>
+              <span class="pull-bow tip-offset-1n tip-3-level"></span>
               <span class="finger tip-offset-2n tip-4-level">三</span>
             </span>
             <span class="beat-bottom">
@@ -393,6 +421,7 @@
             2321
             <span class="beat-top">
               <span class="arc arc-offset-1n arc-4n"></span>
+              <span class="finger tip-offset-2n tip-4-level">三</span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-4n"></span>
@@ -417,7 +446,7 @@
             2<span class="half">.</span>
             <span class="beat-top">
               <sapn class="arc arc-offset-1n-1d" data-arc-from="1n-1d" data-arc-cross="1" data-arc-to="2n"></sapn>
-              <span class="push-bow tip-offset-1n tip-3-level"></span>
+              <span class="pull-bow tip-offset-1n tip-3-level"></span>
             </span>
           </div>
           <div class="beat beat-2 beat-2n">
@@ -493,7 +522,7 @@
             2321
             <span class="beat-top">
               <span class="arc arc-offset-1n arc-4n"></span>
-              <span class="push-bow tip-offset-1n tip-3-level"></span>
+              <span class="pull-bow tip-offset-1n tip-3-level"></span>
               <span class="finger tip-offset-2n tip-4-level">三</span>
             </span>
             <span class="beat-bottom">
@@ -519,6 +548,7 @@
             2321
             <span class="beat-top">
               <span class="arc arc-offset-1n arc-4n"></span>
+              <span class="finger tip-offset-2n tip-4-level">三</span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-4n"></span>
@@ -542,8 +572,10 @@
           <div class="beat beat-2 beat-2n-1d">
             2<span class="half"> </span>2
             <span class="beat-top">
-              <span class="push-bow tip-offset-1n tip-2-level"></span>
+              <span class="pull-bow tip-offset-1n tip-4-level"></span>
               <span class="decorate decorate-offset-1n-before-2n-1d">1</span>
+              <span class="staccato tip-offset-1n tip-1-level"></span>
+              <span class="staccato tip-offset-2n-1d tip-1-level"></span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -553,6 +585,8 @@
             2<span class="half"> </span>2
             <span class="beat-top">
               <span class="decorate decorate-offset-1n-before-2n-1d">1</span>
+              <span class="staccato tip-offset-1n tip-1-level"></span>
+              <span class="staccato tip-offset-2n-1d tip-1-level"></span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -566,6 +600,8 @@
             2<span class="half"> </span>2
             <span class="beat-top">
               <span class="decorate decorate-offset-1n-before-2n-1d">1</span>
+              <span class="staccato tip-offset-1n tip-1-level"></span>
+              <span class="staccato tip-offset-2n-1d tip-1-level"></span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -574,8 +610,9 @@
           <div class="beat beat-2 beat-2n-1d">
             2<span class="half"> </span>2
             <span class="beat-top">
-              <span class="arc arc-offset-1n arc-2n-1d"></span>
               <span class="decorate decorate-offset-1n-before-2n-1d">1</span>
+              <span class="staccato tip-offset-1n tip-1-level"></span>
+              <span class="staccato tip-offset-2n-1d tip-1-level"></span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -632,6 +669,9 @@
         <div class="section">
           <div class="beat beat-2 beat-1n">
             6
+            <span class="beat-top">
+              <span class="pull-bow tip-offset-1n tip-1-level"></span>
+            </span>
             <span class="beat-bottom">
               <span class="dot dot-offset-1n"></span>
             </span>
@@ -671,6 +711,7 @@
             6<span class="half">.</span>
             <span class="beat-top">
               <span class="pull-bow tip-offset-1n tip-2-level"></span>
+              <span class="arc" data-arc-from="1n-1d" data-arc-cross="1" data-arc-to="2n"></span>
             </span>
             <span class="beat-bottom">
               <span class="dot dot-offset-1n"></span>
@@ -678,9 +719,6 @@
           </div>
           <div class="beat beat-2 beat-2n">
             12
-            <span class="beat-top">
-              <span class="arc arc-offset-1n arc-2n"></span>
-            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n"></span>
               <span class="under under-16th under-offset-1n under-2n"></span>
@@ -692,15 +730,15 @@
         <div class="section">
           <div class="beat beat-2 beat-1n-1d">
             6<span class="half">.</span>
+            <span class="beat-top">
+              <span class="arc" data-arc-from="1n-1d" data-arc-cross="1" data-arc-to="2n"></span>
+            </span>
             <span class="beat-bottom">
               <span class="dot dot-offset-1n"></span>
             </span>
           </div>
           <div class="beat beat-2 beat-2n">
             12
-            <span class="beat-top">
-              <span class="arc arc-offset-1n arc-2n"></span>
-            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n"></span>
               <span class="under under-16th under-offset-1n under-2n"></span>
@@ -712,15 +750,15 @@
         <div class="section">
           <div class="beat beat-2 beat-1n-1d">
             6<span class="half">.</span>
+            <span class="beat-top">
+              <span class="arc" data-arc-from="1n-1d" data-arc-cross="1" data-arc-to="2n"></span>
+            </span>
             <span class="beat-bottom">
               <span class="dot dot-offset-1n"></span>
             </span>
           </div>
           <div class="beat beat-2 beat-2n">
             12
-            <span class="beat-top">
-              <span class="arc arc-offset-1n arc-2n"></span>
-            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n"></span>
               <span class="under under-16th under-offset-1n under-2n"></span>
@@ -732,15 +770,15 @@
         <div class="section">
           <div class="beat beat-2 beat-1n-1d">
             6<span class="half">.</span>
+            <span class="beat-top">
+              <span class="arc" data-arc-from="1n-1d" data-arc-cross="1" data-arc-to="2n"></span>
+            </span>
             <span class="beat-bottom">
               <span class="dot dot-offset-1n"></span>
             </span>
           </div>
           <div class="beat beat-2 beat-2n">
             12
-            <span class="beat-top">
-              <span class="arc arc-offset-1n arc-2n"></span>
-            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n"></span>
               <span class="under under-16th under-offset-1n under-2n"></span>
@@ -841,12 +879,18 @@
       </div>
       <div class="col-lg-2">
         <div class="section">
-          <div class="beat beat-2">3</div>
+          <div class="beat beat-2 beat-1n">
+            3
+            <span class="beat-top">
+              <span class="pull-bow tip-offset-1n tip-2-level"></span>
+            </span>
+          </div>
           <div class="beat beat-2 beat-2n-1d">
             6<span class="half">.</span>1
             <span class="beat-top">
               <span class="dot dot-offset-2n-1d"></span>
               <span class="arc arc-offsest-1n arc-2n-1d"></span>
+              <span class="finger tip-offset-1n tip-4-level">二</span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -878,6 +922,9 @@
         <div class="section">
           <div class="beat beat-2 beat-2n-1d">
             5<span class="half"> </span>6
+            <span class="beat-top">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
             </span>
@@ -921,6 +968,7 @@
             <span class="beat-top">
               <span class="dot dot-offset-2n-1d"></span>
               <span class="arc arc-offsest-1n arc-2n-1d"></span>
+              <span class="finger tip-offset-1n tip-4-level">二</span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -949,6 +997,7 @@
             2<span class="half"> </span>3
             <span class="beat-top">
               <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="finger tip-offset-2n-1d tip-4-level">三</span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1015,6 +1064,7 @@
             2<span class="half"> </span>3
             <span class="beat-top">
               <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="finger tip-offset-2n-1d tip-4-level">三</span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1043,7 +1093,9 @@
           <div class="beat beat-2 beat-2n-1d">
             3<span class="half"> </span>2
             <span class="beat-top">
-              <span class="finger tip-offset-1n tip-2-level">三</span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="pull-bow tip-offset-1n tip-6-level"></span>
+              <span class="finger tip-offset-1n tip-4-level">三</span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1056,7 +1108,8 @@
           <div class="beat beat-2 beat-2n-1d">
             1<span class="half">.</span>2
             <span class="beat-top">
-              <span class="push-bow tip-offset-1n tip-1-level"></span>
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="push-bow tip-offset-1n tip-3-level"></span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1065,6 +1118,9 @@
           </div>
           <div class="beat beat-2 beat-2n-1d">
             3<span class="half"> </span>5
+            <span class="beat-top">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
             </span>
@@ -1089,6 +1145,11 @@
         <div class="section">
           <div class="beat beat-2 beat-2n-1d">
             2<span class="half"> </span>3
+            <span class="beat-top">
+              <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="push-bow tip-offset-1n tip-3-level"></span>
+              <span class="finger tip-offset-2n-1d tip-4-level">三</span>
+            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
             </span>
@@ -1108,6 +1169,9 @@
         <div class="section">
           <div class="beat beat-2 beat-1n">
             6
+            <span class="beat-top">
+              <span class="push-bow tip-offset-1n tip-2-level"></span>
+            </span>
             <span class="beat-bottom">
               <span class="dot dot-offset-1n"></span>
             </span>
@@ -1119,6 +1183,9 @@
         <div class="section">
           <div class="beat beat-2 beat-3n">
             333
+            <span class="beat-top">
+              <span class="pull-bow tip-offset-1n tip-2-level"></span>
+            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-3n"></span>
               <span class="under under-16th under-offset-2n under-2n"></span>
@@ -1131,6 +1198,7 @@
               <span class="staccato tip-offset-2n-1d tip-3-level"></span>
               <span class="dot dot-offset-2n-1d"></span>
               <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="finger tip-offset-1n tip-7-level">二</span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1191,7 +1259,7 @@
           <div class="beat beat-2 beat-3n">
             666
             <span class="beat-top">
-              <span class="finger tip-offset-1n tip-2-level">二</span>
+              <span class="finger tip-offset-1n tip-2-level">四</span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-3n"></span>
@@ -1219,6 +1287,9 @@
         <div class="section">
           <div class="beat beat-2 beat-3n">
             333
+            <span class="beat-top">
+              <span class="pull-bow tip-offset-1n tip-2-level"></span>
+            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-3n"></span>
               <span class="under under-16th under-offset-2n under-2n"></span>
@@ -1231,6 +1302,7 @@
               <span class="staccato tip-offset-2n-1d tip-3-level"></span>
               <span class="dot dot-offset-2n-1d"></span>
               <span class="arc arc-offset-1n arc-2n-1d"></span>
+              <span class="finger tip-offset-1n tip-7-level">二</span>
             </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-2n-1d"></span>
@@ -1264,6 +1336,9 @@
         <div class="section">
           <div class="beat beat-2 beat-3n">
             223
+            <span class="beat-top">
+              <span class="finger tip-offset-3n tip-2-level">三</span>
+            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-3n"></span>
               <span class="under under-16th under-offset-2n under-2n"></span>
@@ -1309,6 +1384,9 @@
         <div class="section">
           <div class="beat beat-2 beat-3n">
             555
+            <span class="beat-top">
+              <span class="pull-bow tip-offset-1n tip-2-level"></span>
+            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-3n"></span>
               <span class="under under-16th under-offset-2n under-2n"></span>
@@ -1358,6 +1436,9 @@
         <div class="section">
           <div class="beat beat-2 beat-3n">
             223
+            <span class="beat-top">
+              <span class="finger tip-offset-3n tip-2-level">三</span>
+            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-3n"></span>
               <span class="under under-16th under-offset-2n under-2n"></span>
@@ -1402,6 +1483,9 @@
         <div class="section">
           <div class="beat beat-2 beat-4n">
             1612
+            <span class="beat-top">
+              <span class="pull-bow tip-offset-1n tip-1-level"></span>
+            </span>
             <span class="beat-bottom">
               <span class="dot dot-offset-2n"></span>
               <span class="under under-8th under-offset-1n under-4n"></span>
@@ -1410,6 +1494,10 @@
           </div>
           <div class="beat beat-2 beat-4n">
             3235
+            <span class="beat-top">
+              <span class="finger tip-offset-1n tip-2-level">三</span>
+              <span class="finger tip-offset-3n tip-2-level">０</span>
+            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-4n"></span>
               <span class="under under-16th under-offset-1n under-4n"></span>
@@ -1442,6 +1530,9 @@
         <div class="section">
           <div class="beat beat-2 beat-4n">
             2321
+            <span class="beat-top">
+              <span class="finger tip-offset-2n tip-2-level">三</span>
+            </span>
             <span class="beat-bottom">
               <span class="under under-8th under-offset-1n under-4n"></span>
               <span class="under under-16th under-offset-1n under-4n"></span>
@@ -1461,11 +1552,19 @@
         <div class="section">
           <div class="beat beat-2 beat-1n">
             6
+            <span class="beat-top">
+              <span class="pull-bow tip-offset-1n tip-1-level"></span>
+            </span>
             <span class="beat-bottom">
               <span class="dot dot-offset-1n"></span>
             </span>
           </div>
-          <div class="beat beat-2">6</div>
+          <div class="beat beat-2 beat-1n">
+            6
+            <span class="beat-top">
+              <span class="push-bow tip-offset-1n tip-1-level"></span>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -2483,7 +2582,9 @@
       </div>
       <div class="col-lg-2">
         <div class="section">
-          <div class="beat beat-2"></div>
+          <div class="beat beat-2">
+            <input type="text" class="form-control">
+          </div>
           <div class="beat beat-2"></div>
         </div>
       </div>

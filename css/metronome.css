@@ -2,8 +2,9 @@
   width: 300px;
   height: 500px;
   position: fixed;
+  z-index: 2;
   top: 50px;
-  left: -300px;
+  /*left: -300px;*/
   background-color: rgba(0, 0, 0, 1);
   -webkit-border-radius: 0 20px 20px 0;
   -moz-border-radius: 0 20px 20px 0;
@@ -56,6 +57,72 @@
   line-height: 236px;
 }
 
+#metronome .time-signature {
+  font-size: 28px;
+  color: #fff;
+  margin: 45px 25px 0 40px;
+  display: inline-block;
+}
+#metronome .time-signature > div {
+  width: 40px;
+  display: inline-block;
+  border: 2px solid #fff;
+  padding: 0 10px;
+  position: relative;
+}
+#metronome .time-signature > div > .up,
+#metronome .time-signature > div > .down {
+  width: 40px;
+  font-size: 14px;
+  text-align: center;
+  position: absolute;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+#metronome .time-signature > div > .up:hover,
+#metronome .time-signature > div > .down:hover {
+  background-color: #fff;
+  color: #000;
+}
+#metronome .time-signature > div > .up {
+  top: -24px;
+  left: -2px;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+  -o-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+}
+#metronome .time-signature > div > .down {
+  left: -2px;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+  -o-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+}
+#metronome .tempo-trigger {
+  width: 88px;
+  height: 88px;
+  font-size: 48px;
+  color: #fff;
+  text-align: center;
+  border: 2px solid #fff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+#metronome .tempo-trigger:hover {
+  color: #000;
+  background-color: #fff;
+  border-color: #fff;
+}
+#metronome .tempo-trigger span {
+  position: relative;
+  top: 12px;
+}
 
 #metronome input[type=range] {
   -webkit-appearance: none;
@@ -107,3 +174,17 @@
   background: #ff9b33;
   cursor: pointer;
 }
+
+#metronome select {
+  width: 105px;
+  border: 2px solid #fff;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 1);
+  outline: none;
+  margin: 20px 40px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+
