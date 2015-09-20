@@ -4,7 +4,7 @@
   position: fixed;
   z-index: 2;
   top: 50px;
-  /*left: -300px;*/
+  left: -300px;
   background-color: rgba(0, 0, 0, 1);
   -webkit-border-radius: 0 20px 20px 0;
   -moz-border-radius: 0 20px 20px 0;

@@ -211,6 +211,7 @@
   border-color: #000 transparent transparent;
   position: absolute;
   top: -8px;
+  z-index: -1;
 }
 .arc-2n { min-width: 34px; }
 .arc-2n-1d { min-width: 42px; }
@@ -585,8 +586,19 @@
   position: absolute;
 }
 
+.hold-tone {
+  width: 10px;
+  height: 3px;
+  background-color: #000;
+  display: inline-block;
+  position: absolute;
+  top: -2px;
+}
+
 input.form-control {
   height: 28px;
+  font-size: 20px;
+  padding: 1px 0;
   text-align: center;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;

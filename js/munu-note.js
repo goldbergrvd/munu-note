@@ -302,3 +302,22 @@
   });
 
 } ());
+
+(function () {
+  $(document.body).on('keyup', function (e) {
+    if (e.which === 13) {
+      $('.beat > input').replaceWith(function () {
+        return '<span class="beat-number">' +
+                 this.value.replace(/(\.|\s)/g, function(all, c) {
+                   return '<span class="half">' + c + '</span>';
+                 }) +
+               '</span>';
+      });
+    }
+  });
+
+  $('.container').on('click', '.beat-number', function (e) {
+    this.parentNode.insertAdjacentHTML('afterbegin', '<input type="text" class="form-control" value="' + this.textContent + '">');
+    this.parentNode.removeChild(this);
+  });
+} ());
