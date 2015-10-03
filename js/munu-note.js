@@ -20,7 +20,8 @@
                       '<span class="glyphicon glyphicon-chevron-left"></span>' +
                     '</div>';
 
-  var $metronome = $('#metronome');
+  var $metronome = $('#metronome'),
+      $noteList = $('#note-list');
 
   function formatSec(secValue) {
     var min = parseInt(secValue / 60),
@@ -157,6 +158,23 @@
     $metronome.find('#tempo-sound').on('change', function (e) {
       a1 = new Audio('sound/' + this.value + '1.mp3');
       a2 = new Audio('sound/' + this.value + '2.mp3');
+    });
+  } ());
+
+  (function () {
+    $noteList.find('ul:first').on('click', '.folder', function (e) {
+      $(this.nextElementSibling).toggleClass('hide');
+    });
+
+    $noteList.find('.note-list-toggle').on('click', function (e) {
+      $toggle = $(this);
+      $toggle.toggleClass('off');
+
+      if ($toggle.hasClass('off')) {
+        $noteList.css('left', -300);
+      } else {
+        $noteList.css('left', 0);
+      }
     });
   } ());
 
