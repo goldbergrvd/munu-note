@@ -116,11 +116,12 @@
   font-weight: 500;
   font-family: monospace;
   position: relative;
-  margin: 60px 0 0;
+  margin-top: 60px;
 }
-
-/* 每段結尾的那一槓 */
-.section::before {
+.row:last-of-type .section {
+  margin-bottom: 30px;
+}
+.section::before { /* 每段結尾的那一槓 */
   content: "";
   height: 100%;
   position: absolute;
@@ -614,6 +615,22 @@
   position: absolute;
   top: 4px;
   left: 2.5px;
+}
+
+.forte-piano {
+  font-size: 16px;
+  font-family: "Times New Roman";
+  font-style: italic;
+  font-weight: bolder;
+  position: absolute;
+  top: 2px;
+}
+
+.pause {
+  font-family: "Times New Roman";
+  position: absolute;
+  top: -6px;
+  right: -10px;
 }
 
 input.form-control {
