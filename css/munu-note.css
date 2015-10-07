@@ -129,6 +129,23 @@
   border-right: 1px solid #000;
 }
 
+.crescendo,
+.decrescendo {
+  display: inline-block;
+  position: absolute;
+  top: 42px;
+  left: 0px;
+}
+.crescendo > span,
+.decrescendo > span {
+  border-style: solid;
+  position: absolute;
+}
+.crescendo > span.line { border-color: transparent #000 transparent transparent; }
+.crescendo > span.mask { border-color: transparent #fff transparent transparent; }
+.decrescendo > span.line { border-color: transparent transparent transparent #000; }
+.decrescendo > span.mask { border-color: transparent transparent transparent #fff; }
+
 .half {
   font-size: 16px;
 }
@@ -493,6 +510,8 @@
 .tip-5-level { top: -28px; }
 .tip-6-level { top: -33px; }
 .tip-7-level { top: -38px; }
+.tip-8-level { top: -43px; }
+.tip-9-level { top: -48px; }
 
 .finger {
   font-size: 10px;

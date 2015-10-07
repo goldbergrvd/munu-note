@@ -82,6 +82,28 @@
   }());
 
   (function () {
+    var sectionSepWidth = 30,
+        maskOffset = 8;
+
+    $('.crescendo, .decrescendo').each(function (i, e) {
+      var $e = $(e),
+          cross = parseInt(e.dataset.cross),
+          sectionWidth = e.parentNode.clientWidth,
+          borderWidthValue = (sectionWidth * cross) + (sectionSepWidth * (cross - 1)),
+          borderWidth = ($e.hasClass('crescendo') ?
+                        '5px ' + borderWidthValue + 'px 5px 0px' :
+                        '5px 0px 5px ' + borderWidthValue + 'px'),
+          maskLeft = ($e.hasClass('crescendo') ? maskOffset * cross : -maskOffset * cross);
+      $e.find('span').css({
+        borderWidth: borderWidth
+      });
+      $e.find('.mask').css({
+        left: maskLeft
+      });
+    });
+  }());
+
+  (function () {
     var a1 = new Audio('sound/beat1.mp3');
     var a2 = new Audio('sound/beat2.mp3');
     var count = -8;
