@@ -83,7 +83,7 @@
 
   (function () {
     var sectionSepWidth = 30,
-        maskOffset = 8;
+        maskOffset = 16;
 
     $('.crescendo, .decrescendo').each(function (i, e) {
       var $e = $(e),
@@ -123,7 +123,7 @@
         window.scrollTo(0, 0);
       }
 
-      if (count % 12 == 0) {
+      if (count % 12 === 0) {
         currRowIndex = count / 12;
         var $currRow = $($rows.get(currRowIndex));
         if ($currRow.length === 0) {
@@ -136,7 +136,7 @@
           $currRow.prepend(currPosHtml);
           var currPosEle = document.querySelector('.curr-pos'),
               screenHeight = document.documentElement.clientHeight,
-              currPosEleTop = currPosEle.getBoundingClientRect().top
+              currPosEleTop = currPosEle.getBoundingClientRect().top,
               diff = screenHeight - currPosEleTop;
           if (diff < 200 || diff > 800) {
             window.scrollTo(0, $('.curr-pos').parent().position().top - 200);
@@ -167,7 +167,7 @@
     });
 
     $metronome.find('.metronome-toggle').on('click', function (e) {
-      $toggle = $(this);
+      var $toggle = $(this);
       $toggle.toggleClass('off');
 
       if ($toggle.hasClass('off')) {
@@ -189,7 +189,7 @@
     });
 
     $noteList.find('.note-list-toggle').on('click', function (e) {
-      $toggle = $(this);
+      var $toggle = $(this);
       $toggle.toggleClass('off');
 
       if ($toggle.hasClass('off')) {
@@ -218,8 +218,10 @@
       });
 
       do {
-        if (currRowIndex >= $rows.length) currRowIndex = 0;
-        $currRow = $($rows.get(currRowIndex));
+        if (currRowIndex >= $rows.length) {
+          currRowIndex = 0;
+        }
+        var $currRow = $($rows.get(currRowIndex));
         if (currTimeText.localeCompare($currRow.data('start-time')) > 0 &&
             currTimeText.localeCompare($currRow.data('end-time')) <=0) {
           if (!$currRow.find('.curr-pos').length) {
@@ -296,7 +298,9 @@
   $volumeBar.on('mousedown', function (e) {
     var targetClassName = $(e.target).attr('class');
 
-    if (targetClassName === 'volume-bar') return;
+    if (targetClassName === 'volume-bar') {
+      return;
+    }
 
     if ($volume.hasClass('glyphicon-volume-off')) {
       $volume.toggleClass('glyphicon-volume-up');
