@@ -89,9 +89,9 @@
 }
 
 
-.container {
+/*.container {
   margin-bottom: 50px;
-}
+}*/
 
 .curr-pos {
   position: relative;
@@ -155,7 +155,8 @@
   text-align: center;
   display: inline-block;
   position: relative;
-  margin: 0 -3px;
+  /*margin: 0 -3px;  html 寫死要這樣 */
+  margin: 0 4px; /* React render 要這樣 */
 }
 .beat-5n-1d { left: -13px; }
 
@@ -680,12 +681,19 @@ input.form-control {
   color: #fff;
   background-color: rgba(0, 0, 0, 1);
   padding: 20px 30px;
-  border: 3px solid rgba(255, 0, 0, 0.5);
-  border-radius: 20px;
-  box-shadow: 0px 0px 3px 2px rgba(255, 0, 0, 0.5);
-  position: absolute;
-  top: 130px;
-  z-index: 1;
+  /*border: 3px solid rgba(255, 0, 0, 0.5);*/
+  /*border-radius: 20px;*/
+  /*box-shadow: 0px 0px 3px 2px rgba(255, 0, 0, 0.5);*/
+  /*position: absolute;*/
+  /*top: 130px;*/
+  /*z-index: 1;*/
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .edit-panel fieldset {
@@ -724,6 +732,7 @@ input.form-control {
   border-radius: 5px;
   display: inline-block;
   text-align: center;
+  margin: 0 5px 0 0;
   padding: 3px 10px;
   cursor: pointer;
 }
@@ -731,4 +740,16 @@ input.form-control {
 .edit-panel .selection:hover {
   color: #0f0;
   border-color: #0f0;
+}
+
+.edit-panel button {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.beat-editing {
+  background-color: rgba(203, 203, 203, 0.5);
+}
+.note-editing {
+  background-color: rgba(255, 0, 0, 0.5);
 }

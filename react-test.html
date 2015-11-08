@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Musical Notation</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/munu-note.css" rel="stylesheet">
+  <link href="css/left-nav.css" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    .musical-note {
+      height: 50%;
+      overflow: scroll;
+    }
+
+    .edit-panel {
+      height: 50%;
+      display: fixed;
+      overflow: scroll;
+    }
+  </style>
+</head>
+<body>
+  <div class="container musical-note"></div>
+  <div class="edit-panel"></div>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="https://fb.me/react-0.14.0.js"></script>
+  <script src="https://fb.me/react-dom-0.14.0.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
