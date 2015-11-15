@@ -613,13 +613,13 @@
   background-color: #000;
   display: inline-block;
   position: absolute;
-  top: -2px;
+  /*top: -2px;*/
 }
 
 .fermata {
   display: inline-block;
   position: absolute;
-  top: -16px;
+  /*top: -16px;*/
 }
 .fermata::before {
   content: "";
