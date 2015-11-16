@@ -184,6 +184,50 @@ var Beat = React.createClass({
       d: 0
     });
 
+    // 連弓
+    this.props.beat.notes.reduce((memo, note) => {
+      memo.rightOffset.n += 1;
+
+      if (note.continuousBowCount > 1) {
+        memo.result.push({
+          noteLength: note.continuousBowCount,
+          rightXnXd: Beat.toXnXd(memo.rightOffset),
+          arcLength: {
+            n: 0,
+            d: 0
+          }
+        });
+      }
+
+      memo.result.forEach((e) => {
+        if (e.noteLength > 0) {
+          e.noteLength--;
+          e.arcLength.n += 1;
+          if (note.right) {
+            e.arcLength.d += 1;
+          }
+        }
+      });
+
+      if (note.right) {
+        memo.rightOffset.d += 1;
+      }
+
+      return memo;
+    }, {
+      result: [],
+      rightOffset: {
+        n: 0,
+        d: 0
+      }
+    })
+    .result.forEach((e) => {
+      var type = "arc";
+      var rightOffset = "arc-offset-" + e.rightXnXd;
+      var length = "arc-" + Beat.toXnXd(e.arcLength);
+      beatTop.push(<span className={type + " " + rightOffset + " " + length}></span>);
+    });
+
     return (
       <div className={"beat beat-2 " + beatLength}>
         <span className="beat-number">{beat}</span>
@@ -653,6 +697,35 @@ var SpecialSignEditor = React.createClass({
 
 });
 
+var ContinuousBowEditor = React.createClass({
+
+  onContinuousBowChange: function (event) {
+    this.props.onContinuousBowChange(event.target.value);
+  },
+
+  render: function() {
+    return (
+      <fieldset ref="fieldset">
+        <legend>連弓</legend>
+        <span>連續 </span>
+        <select onChange={this.onContinuousBowChange} value={this.props.value}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+        <span> 音</span>
+      </fieldset>
+    );
+  }
+
+});
+
 var AccidentalEditor = React.createClass({
 
   getDefaultProps: function () {
@@ -995,6 +1068,18 @@ var EditPanel = React.createClass({
     this.renderMusicalNote();
   },
 
+  onContinuousBowChange: function (value) {
+    console.log('continuous bow change: ' + value);
+    var newSections = this.state.sections;
+    newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].continuousBowCount = value;
+
+    this.setState({
+      sections: newSections
+    });
+
+    this.renderMusicalNote();
+  },
+
   onPrevLineClick: function () {
     var newSections = this.state.sections,
         newSectionIndex = this.state.editSection - this.props.sectionsPerRow;
@@ -1245,6 +1330,7 @@ var EditPanel = React.createClass({
         <NoteValueEditor value={note.value} onNoteValueChange={this.onNoteValueChange} />
         <FortePianoEditor />
         <SpecialSignEditor value={note.specialSign} onSpecialSignChange={this.onSpecialSignChange} />
+        <ContinuousBowEditor value={note.continuousBowCount} onContinuousBowChange={this.onContinuousBowChange} />
         <AccidentalEditor />
         <RightOfNumberEditor value={note.right} onRightOfNoteChange={this.onRightOfNoteChange} />
         <Pager onPrevBeatClick={this.onPrevBeatClick}
@@ -1281,6 +1367,7 @@ function Note() {
     tip: '',
     offset: 1
   };
+  this.continuousBowCount = 1;
   this.editing = true;
 }
 
