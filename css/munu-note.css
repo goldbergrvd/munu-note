@@ -742,6 +742,12 @@ input.form-control {
   border-color: #0f0;
 }
 
+.edit-panel input {
+  width: 48px;
+  color: #000;
+  outline: none;
+}
+
 .edit-panel button {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 1);

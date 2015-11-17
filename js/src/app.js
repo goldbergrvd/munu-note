@@ -188,26 +188,12 @@ var Beat = React.createClass({
     this.props.beat.notes.reduce((memo, note) => {
       memo.rightOffset.n += 1;
 
-      if (note.continuousBowCount > 1) {
+      if (note.continuousBowPixel > 1) {
         memo.result.push({
-          noteLength: note.continuousBowCount,
           rightXnXd: Beat.toXnXd(memo.rightOffset),
-          arcLength: {
-            n: 0,
-            d: 0
-          }
+          arcLength: note.continuousBowPixel
         });
       }
-
-      memo.result.forEach((e) => {
-        if (e.noteLength > 0) {
-          e.noteLength--;
-          e.arcLength.n += 1;
-          if (note.right) {
-            e.arcLength.d += 1;
-          }
-        }
-      });
 
       if (note.right) {
         memo.rightOffset.d += 1;
@@ -224,8 +210,8 @@ var Beat = React.createClass({
     .result.forEach((e) => {
       var type = "arc";
       var rightOffset = "arc-offset-" + e.rightXnXd;
-      var length = "arc-" + Beat.toXnXd(e.arcLength);
-      beatTop.push(<span className={type + " " + rightOffset + " " + length}></span>);
+      var style = { width: e.arcLength };
+      beatTop.push(<span className={type + " " + rightOffset} style={style}></span>);
     });
 
     return (
@@ -703,23 +689,17 @@ var ContinuousBowEditor = React.createClass({
     this.props.onContinuousBowChange(event.target.value);
   },
 
+  onChange: function (event) {
+    this.props.onContinuousBowChange(event.target.value);
+  },
+
   render: function() {
     return (
       <fieldset ref="fieldset">
         <legend>連弓</legend>
-        <span>連續 </span>
-        <select onChange={this.onContinuousBowChange} value={this.props.value}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-        </select>
-        <span> 音</span>
+        <span>長度：</span>
+        <input value={this.props.value} onChange={this.onChange}></input>
+        <span> pixel</span>
       </fieldset>
     );
   }
@@ -968,116 +948,56 @@ var EditPanel = React.createClass({
             document.querySelector('.container'));
   },
 
-  onMusicalNoteChange: function (value) {
-    console.log('musical note change: ' + value);
+  setEditNoteValue: function(property, value) {
+    console.log(property + ': ' + (value.tip ? value.tip + '-' + value.offset : value));
     var newSections = this.state.sections;
-    newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].note = value;
-
-    this.setState({
-      sections: newSections
-    });
-
+    if (property === 'right') {
+      if (value) {
+        newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].right = value;
+      } else {
+        delete newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].right;
+      }
+    } else {
+      newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote][property] = value;
+    }
+    this.setState({ sections: newSections });
     this.renderMusicalNote();
+  },
+
+  onMusicalNoteChange: function (value) {
+    this.setEditNoteValue('note', value);
   },
 
   onRightOfNoteChange: function (value) {
-    console.log('right of note change: ' + value);
-    var newSections = this.state.sections;
-    if (value) {
-      newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].right = value;
-    } else {
-      delete newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].right;
-    }
-
-    this.setState({
-      sections: newSections
-    });
-
-    this.renderMusicalNote();
+    this.setEditNoteValue('right', value);
   },
 
   onFingerMethodChange: function (value) {
-    console.log('finger method change: ' + value.tip + ' - ' + value.offset);
-    var newSections = this.state.sections;
-    newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].finger = value;
-
-    this.setState({
-      sections: newSections
-    });
-
-    this.renderMusicalNote();
+    this.setEditNoteValue('finger', value);
   },
 
   onBowingChange: function (value) {
-    console.log('bowing change: ' + value.tip + ' - ' + value.offset);
-    var newSections = this.state.sections;
-    newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].bowing = value;
-
-    this.setState({
-      sections: newSections
-    });
-
-    this.renderMusicalNote();
+    this.setEditNoteValue('bowing', value);
   },
 
   onInOutChange: function (value) {
-    console.log('inOut change: ' + value.tip + ' - ' + value.offset);
-    var newSections = this.state.sections;
-    newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].inOut = value;
-
-    this.setState({
-      sections: newSections
-    });
-
-    this.renderMusicalNote();
+    this.setEditNoteValue('inOut', value);
   },
 
   onSpecialSignChange: function (value) {
-    console.log('special sign change: ' + value.tip + ' - ' + value.offset);
-    var newSections = this.state.sections;
-    newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].specialSign = value;
-
-    this.setState({
-      sections: newSections
-    });
-
-    this.renderMusicalNote();
+    this.setEditNoteValue('specialSign', value);
   },
 
   onPitchChange: function (value) {
-    console.log('pitch change: ' + value);
-    var newSections = this.state.sections;
-    newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].pitch = value;
-
-    this.setState({
-      sections: newSections
-    });
-
-    this.renderMusicalNote();
+    this.setEditNoteValue('pitch', value);
   },
 
   onNoteValueChange: function (value) {
-    console.log('note value change: ' + value);
-    var newSections = this.state.sections;
-    newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].value = value;
-
-    this.setState({
-      sections: newSections
-    });
-
-    this.renderMusicalNote();
+    this.setEditNoteValue('value', value);
   },
 
   onContinuousBowChange: function (value) {
-    console.log('continuous bow change: ' + value);
-    var newSections = this.state.sections;
-    newSections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote].continuousBowCount = value;
-
-    this.setState({
-      sections: newSections
-    });
-
-    this.renderMusicalNote();
+    this.setEditNoteValue('continuousBowPixel', value);
   },
 
   onPrevLineClick: function () {
@@ -1330,7 +1250,7 @@ var EditPanel = React.createClass({
         <NoteValueEditor value={note.value} onNoteValueChange={this.onNoteValueChange} />
         <FortePianoEditor />
         <SpecialSignEditor value={note.specialSign} onSpecialSignChange={this.onSpecialSignChange} />
-        <ContinuousBowEditor value={note.continuousBowCount} onContinuousBowChange={this.onContinuousBowChange} />
+        <ContinuousBowEditor value={note.continuousBowPixel} onContinuousBowChange={this.onContinuousBowChange} />
         <AccidentalEditor />
         <RightOfNumberEditor value={note.right} onRightOfNoteChange={this.onRightOfNoteChange} />
         <Pager onPrevBeatClick={this.onPrevBeatClick}
@@ -1367,7 +1287,7 @@ function Note() {
     tip: '',
     offset: 1
   };
-  this.continuousBowCount = 1;
+  this.continuousBowPixel = 0;
   this.editing = true;
 }
 
