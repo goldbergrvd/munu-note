@@ -290,8 +290,32 @@ var MusicalNoteEditor = React.createClass({
 
   getDefaultProps: function () {
     return {
-      text: ['無', '0', '1', '2', '3', '4', '5', '6', '7', '—']
+      text: ['無', '0', '1', '2', '3', '4', '5', '6', '7', '—'],
+      tip: ['~', '0', '1', '2', '3', '4', '5', '6', '7', '-']
     };
+  },
+
+  componentDidMount: function() {
+    window.addEventListener('keyup', function (e) {
+      switch (e.which) {
+        case 48: // 0
+        case 49: // 1
+        case 50: // 2
+        case 51: // 3
+        case 52: // 4
+        case 53: // 5
+        case 54: // 6
+        case 55: // 7
+          this.onClick(e.which - 47);
+          break;
+        case 192: // ~
+          this.onClick(0);
+          break;
+        case 189: // -
+          this.onClick(9);
+          break;
+      }
+    }.bind(this), false);
   },
 
   onClick: function (i) {
@@ -304,8 +328,9 @@ var MusicalNoteEditor = React.createClass({
         <legend>音符</legend>
         {
           this.props.text.map((text, i) => {
-            return <span className={ 'selection' + (i === this.props.text.indexOf(this.props.value) ? ' selected' : '') }
-                         onClick={this.onClick.bind(this, i)}>{text}</span>;
+            return <span className={ 'tip selection' + (i === this.props.text.indexOf(this.props.value) ? ' selected' : '') }
+                         onClick={this.onClick.bind(this, i)}
+                         data-tip={this.props.tip[i]}>{text}</span>;
           })
         }
       </fieldset>
@@ -318,8 +343,34 @@ var FingerMethodEditor = React.createClass({
 
   getDefaultProps: function () {
     return {
-      text: ['無', '０', '一', '二', '三', '四']
+      text: ['無', '０', '一', '二', '三', '四'],
+      tip: ['Q', 'W', 'E', 'R', 'T', 'Y']
     };
+  },
+
+  componentDidMount: function() {
+    window.addEventListener('keyup', function (e) {
+      switch (e.which) {
+        case 81: // Q
+          this.onClick(0);
+          break;
+        case 87: // W
+          this.onClick(1);
+          break;
+        case 69: // E
+          this.onClick(2);
+          break;
+        case 82: // R
+          this.onClick(3);
+          break;
+        case 84: // T
+          this.onClick(4);
+          break;
+        case 89: // Y
+          this.onClick(5);
+          break;
+      }
+    }.bind(this), false);
   },
 
   onClick: function (i) {
@@ -354,8 +405,9 @@ var FingerMethodEditor = React.createClass({
         {
           this.props.text.map((text, i) => {
             var fingerStr = this.props.value.tip || '無';
-            return <span className={ 'selection' + (i === this.props.text.indexOf(fingerStr) ? ' selected' : '') }
-                         onClick={this.onClick.bind(this, i)}>{text}</span>;
+            return <span className={ 'tip selection' + (i === this.props.text.indexOf(fingerStr) ? ' selected' : '') }
+                         onClick={this.onClick.bind(this, i)}
+                         data-tip={this.props.tip[i]}>{text}</span>;
           })
         }
         <span className="selection-tip">向上偏移：</span>
@@ -384,8 +436,25 @@ var BowingEditor = React.createClass({
         {text: '無', value: ''},
         {text: '拉弓', value: 'pull'},
         {text: '推弓', value: 'push'}
-      ]
+      ],
+      tip: ['P', '[', ']']
     };
+  },
+
+  componentDidMount: function() {
+    window.addEventListener('keyup', function (e) {
+      switch (e.which) {
+        case 80: // P
+          this.onClick(0);
+          break;
+        case 219: // [
+          this.onClick(1);
+          break;
+        case 221: // ]
+          this.onClick(2);
+          break;
+      }
+    }.bind(this), false);
   },
 
   onClick: function (i) {
@@ -414,8 +483,9 @@ var BowingEditor = React.createClass({
         <legend>弓法</legend>
         {
           this.props.items.map((item, i) => {
-            return <span className={ 'selection' + (item.value === this.props.value.tip ? ' selected' : '') }
-                         onClick={this.onClick.bind(this, i)}>{item.text}</span>;
+            return <span className={ 'tip selection' + (item.value === this.props.value.tip ? ' selected' : '') }
+                         onClick={this.onClick.bind(this, i)}
+                         data-tip={this.props.tip[i]}>{item.text}</span>;
           })
         }
         <span className="selection-tip">向上偏移：</span>
@@ -440,8 +510,25 @@ var InOutSideEditor = React.createClass({
 
   getDefaultProps: function () {
     return {
-      text: ['無', '內弦', '外弦']
+      text: ['無', '內弦', '外弦'],
+      tip: ['U', 'I', 'O']
     };
+  },
+
+  componentDidMount: function() {
+    window.addEventListener('keyup', function (e) {
+      switch (e.which) {
+        case 85: // U
+          this.onClick(0);
+          break;
+        case 73: // I
+          this.onClick(1);
+          break;
+        case 79: // O
+          this.onClick(2);
+          break;
+      }
+    }.bind(this), false);
   },
 
   onClick: function (i) {
@@ -479,8 +566,9 @@ var InOutSideEditor = React.createClass({
             if (fingerStr !== '無') {
               fingerStr += '弦';
             }
-            return <span className={ 'selection' + (i === this.props.text.indexOf(fingerStr) ? ' selected' : '') }
-                         onClick={this.onClick.bind(this, i)}>{text}</span>;
+            return <span className={ 'tip selection' + (i === this.props.text.indexOf(fingerStr) ? ' selected' : '') }
+                         onClick={this.onClick.bind(this, i)}
+                         data-tip={this.props.tip[i]}>{text}</span>;
           })
         }
         <span className="selection-tip">向上偏移：</span>
@@ -511,8 +599,28 @@ var PitchEditor = React.createClass({
         '8vb': { number: '8', postfix: 'vb'},
         '8va': { number: '8', postfix: 'va'},
         '15ma': { number: '15', postfix: 'ma'}
-      }
+      },
+      tip: ['A', 'S', 'D', 'F']
     };
+  },
+
+  componentDidMount: function() {
+    window.addEventListener('keyup', function (e) {
+      switch (e.which) {
+        case 65: // A
+          this.onClick(0);
+          break;
+        case 83: // S
+          this.onClick(1);
+          break;
+        case 68: // D
+          this.onClick(2);
+          break;
+        case 70: // F
+          this.onClick(3);
+          break;
+      }
+    }.bind(this), false);
   },
 
   onClick: function (i) {
@@ -527,14 +635,16 @@ var PitchEditor = React.createClass({
           this.props.items.map((text, i) => {
             var viewText;
             if (i === 0) {
-              return <span className={ 'selection' + (text === this.props.value ? ' selected' : '') }
-                            onClick={this.onClick.bind(this, i)}>
+              return <span className={ 'tip selection' + (text === this.props.value ? ' selected' : '') }
+                           onClick={this.onClick.bind(this, i)}
+                           data-tip={this.props.tip[i]}>
                        {this.props.itemMapping[text]}
                      </span>;
             } else {
               var itemObj = this.props.itemMapping[text];
-              return <span className={ 'selection' + (text === this.props.value ? ' selected' : '') }
-                            onClick={this.onClick.bind(this, i)}>
+              return <span className={ 'tip selection' + (text === this.props.value ? ' selected' : '') }
+                           onClick={this.onClick.bind(this, i)}
+                           data-tip={this.props.tip[i]}>
                        {itemObj.number}
                        <sup>{itemObj.postfix}</sup>
                      </span>;
@@ -557,8 +667,31 @@ var NoteValueEditor = React.createClass({
         {text: '十六分', value: 16},
         {text: '三十二分', value: 32},
         {text: '六十四分', value: 64}
-      ]
+      ],
+      tip: ['G', 'H', 'J', 'K', 'L']
     };
+  },
+
+  componentDidMount: function() {
+    window.addEventListener('keyup', function (e) {
+      switch (e.which) {
+        case 71: // G
+          this.onClick(0);
+          break;
+        case 72: // H
+          this.onClick(1);
+          break;
+        case 74: // J
+          this.onClick(2);
+          break;
+        case 75: // K
+          this.onClick(3);
+          break;
+        case 76: // L
+          this.onClick(4);
+          break;
+      }
+    }.bind(this), false);
   },
 
   onClick: function (i) {
@@ -571,8 +704,9 @@ var NoteValueEditor = React.createClass({
         <legend>音符時值</legend>
         {
           this.props.items.map((item, i) => {
-            return <span className={ 'selection' + (item.value === this.props.value ? ' selected' : '') }
-                         onClick={this.onClick.bind(this, i)}>{item.text}</span>;
+            return <span className={ 'tip selection' + (item.value === this.props.value ? ' selected' : '') }
+                         onClick={this.onClick.bind(this, i)}
+                         data-tip={this.props.tip[i]}>{item.text}</span>;
           })
         }
       </fieldset>
@@ -744,8 +878,25 @@ var RightOfNumberEditor = React.createClass({
 
   getDefaultProps: function () {
     return {
-      text: ['無', '附點', '空白']
+      text: ['無', '附點', '空白'],
+      tip: [',', '.', 'sp']
     };
+  },
+
+  componentDidMount: function() {
+    window.addEventListener('keyup', function (e) {
+      switch (e.which) {
+        case 188: // ,
+          this.onClick(0);
+          break;
+        case 190: // .
+          this.onClick(1);
+          break;
+        case 32: // space
+          this.onClick(2);
+          break;
+      }
+    }.bind(this), false);
   },
 
   onClick: function (i) {
@@ -775,8 +926,9 @@ var RightOfNumberEditor = React.createClass({
         <legend>右邊</legend>
         {
           this.props.text.map((text, i) => {
-            return <span className={ 'selection' + (i === this.whichIndex(this.props.value) ? ' selected' : '') }
-                         onClick={this.onClick.bind(this, i)}>{text}</span>;
+            return <span className={ 'tip selection' + (i === this.whichIndex(this.props.value) ? ' selected' : '') }
+                         onClick={this.onClick.bind(this, i)}
+                         data-tip={this.props.tip[i]}>{text}</span>;
           })
         }
       </fieldset>
@@ -897,25 +1049,28 @@ var EditPanel = React.createClass({
         case 8:
           this.onDeleteClick();
           break;
-        case 48: // 0
-        case 49: // 1
-        case 50: // 2
-        case 51: // 3
-        case 52: // 4
-        case 53: // 5
-        case 54: // 6
-        case 55: // 7
-          this.onMusicalNoteChange('' + (e.which - 48));
-          break;
-        case 189: // -
-          this.onMusicalNoteChange('—');
-          break;
-        case 190: // .
-          this.onRightOfNoteChange('.');
-          break;
-        case 32: // space
-          this.onRightOfNoteChange(' ');
-          break;
+        // case 48: // 0
+        // case 49: // 1
+        // case 50: // 2
+        // case 51: // 3
+        // case 52: // 4
+        // case 53: // 5
+        // case 54: // 6
+        // case 55: // 7
+        //   this.onMusicalNoteChange('' + (e.which - 48));
+        //   break;
+        // case 192: // ~
+        //   this.onMusicalNoteChange('無');
+        //   break;
+        // case 189: // -
+        //   this.onMusicalNoteChange('—');
+        //   break;
+        // case 190: // .
+        //   this.onRightOfNoteChange('.');
+        //   break;
+        // case 32: // space
+        //   this.onRightOfNoteChange(' ');
+        //   break;
         case 67: // c
           if (e.ctrlKey) {
             if (e.altKey) {

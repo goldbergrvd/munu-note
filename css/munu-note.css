@@ -742,6 +742,21 @@ input.form-control {
   border-color: #0f0;
 }
 
+.edit-panel .tip {
+  position: relative;
+}
+.edit-panel .tip::after {
+  content: attr(data-tip);
+  width: 16px;
+  color: #fff;
+  font-size: 16px;
+  border: 1px dashed white;
+  border-bottom: none;
+  position: absolute;
+  right: 0px;
+  top: -24px;
+}
+
 .edit-panel input {
   width: 48px;
   color: #000;
