@@ -286,7 +286,23 @@ var NumberedMusicalNotation = React.createClass({
 
 });
 
+var KeyboardEventMixin = {
+  componentDidMount: function() {
+    window.addEventListener('keyup', this.keyboardEvent, false);
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    if (nextProps.keyboardEnable) {
+      window.addEventListener('keyup', this.keyboardEvent, false);
+    } else {
+      window.removeEventListener('keyup', this.keyboardEvent);
+    }
+  }
+};
+
 var MusicalNoteEditor = React.createClass({
+
+  mixins: [KeyboardEventMixin],
 
   getDefaultProps: function () {
     return {
@@ -295,27 +311,25 @@ var MusicalNoteEditor = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    window.addEventListener('keyup', function (e) {
-      switch (e.which) {
-        case 48: // 0
-        case 49: // 1
-        case 50: // 2
-        case 51: // 3
-        case 52: // 4
-        case 53: // 5
-        case 54: // 6
-        case 55: // 7
-          this.onClick(e.which - 47);
-          break;
-        case 192: // ~
-          this.onClick(0);
-          break;
-        case 189: // -
-          this.onClick(9);
-          break;
-      }
-    }.bind(this), false);
+  keyboardEvent: function (e) {
+    switch (e.which) {
+      case 48: // 0
+      case 49: // 1
+      case 50: // 2
+      case 51: // 3
+      case 52: // 4
+      case 53: // 5
+      case 54: // 6
+      case 55: // 7
+        this.onClick(e.which - 47);
+        break;
+      case 192: // ~
+        this.onClick(0);
+        break;
+      case 189: // -
+        this.onClick(9);
+        break;
+    }
   },
 
   onClick: function (i) {
@@ -323,12 +337,15 @@ var MusicalNoteEditor = React.createClass({
   },
 
   render: function () {
+
+    var tip = (this.props.keyboardEnable ? 'tip ' : '');
+
     return (
       <fieldset>
         <legend>音符</legend>
         {
           this.props.text.map((text, i) => {
-            return <span className={ 'tip selection' + (i === this.props.text.indexOf(this.props.value) ? ' selected' : '') }
+            return <span className={ tip + 'selection' + (i === this.props.text.indexOf(this.props.value) ? ' selected' : '') }
                          onClick={this.onClick.bind(this, i)}
                          data-tip={this.props.tip[i]}>{text}</span>;
           })
@@ -341,6 +358,8 @@ var MusicalNoteEditor = React.createClass({
 
 var FingerMethodEditor = React.createClass({
 
+  mixins: [KeyboardEventMixin],
+
   getDefaultProps: function () {
     return {
       text: ['無', '０', '一', '二', '三', '四'],
@@ -348,29 +367,27 @@ var FingerMethodEditor = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    window.addEventListener('keyup', function (e) {
-      switch (e.which) {
-        case 81: // Q
-          this.onClick(0);
-          break;
-        case 87: // W
-          this.onClick(1);
-          break;
-        case 69: // E
-          this.onClick(2);
-          break;
-        case 82: // R
-          this.onClick(3);
-          break;
-        case 84: // T
-          this.onClick(4);
-          break;
-        case 89: // Y
-          this.onClick(5);
-          break;
-      }
-    }.bind(this), false);
+  keyboardEvent: function (e) {
+    switch (e.which) {
+      case 81: // Q
+        this.onClick(0);
+        break;
+      case 87: // W
+        this.onClick(1);
+        break;
+      case 69: // E
+        this.onClick(2);
+        break;
+      case 82: // R
+        this.onClick(3);
+        break;
+      case 84: // T
+        this.onClick(4);
+        break;
+      case 89: // Y
+        this.onClick(5);
+        break;
+    }
   },
 
   onClick: function (i) {
@@ -399,13 +416,17 @@ var FingerMethodEditor = React.createClass({
   },
 
   render: function () {
+
+    var tip = (this.props.keyboardEnable ? 'tip ' : '');
+
     return (
       <fieldset ref="fieldset">
         <legend>指法</legend>
         {
           this.props.text.map((text, i) => {
             var fingerStr = this.props.value.tip || '無';
-            return <span className={ 'tip selection' + (i === this.props.text.indexOf(fingerStr) ? ' selected' : '') }
+
+            return <span className={ tip + 'selection' + (i === this.props.text.indexOf(fingerStr) ? ' selected' : '') }
                          onClick={this.onClick.bind(this, i)}
                          data-tip={this.props.tip[i]}>{text}</span>;
           })
@@ -430,6 +451,8 @@ var FingerMethodEditor = React.createClass({
 
 var BowingEditor = React.createClass({
 
+  mixins: [KeyboardEventMixin],
+
   getDefaultProps: function () {
     return {
       items: [
@@ -441,20 +464,18 @@ var BowingEditor = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    window.addEventListener('keyup', function (e) {
-      switch (e.which) {
-        case 80: // P
-          this.onClick(0);
-          break;
-        case 219: // [
-          this.onClick(1);
-          break;
-        case 221: // ]
-          this.onClick(2);
-          break;
-      }
-    }.bind(this), false);
+  keyboardEvent: function (e) {
+    switch (e.which) {
+      case 80: // P
+        this.onClick(0);
+        break;
+      case 219: // [
+        this.onClick(1);
+        break;
+      case 221: // ]
+        this.onClick(2);
+        break;
+    }
   },
 
   onClick: function (i) {
@@ -478,12 +499,15 @@ var BowingEditor = React.createClass({
   },
 
   render: function () {
+
+    var tip = (this.props.keyboardEnable ? 'tip ' : '');
+
     return (
       <fieldset ref="fieldset">
         <legend>弓法</legend>
         {
           this.props.items.map((item, i) => {
-            return <span className={ 'tip selection' + (item.value === this.props.value.tip ? ' selected' : '') }
+            return <span className={ tip + 'selection' + (item.value === this.props.value.tip ? ' selected' : '') }
                          onClick={this.onClick.bind(this, i)}
                          data-tip={this.props.tip[i]}>{item.text}</span>;
           })
@@ -508,6 +532,8 @@ var BowingEditor = React.createClass({
 
 var InOutSideEditor = React.createClass({
 
+  mixins: [KeyboardEventMixin],
+
   getDefaultProps: function () {
     return {
       text: ['無', '內弦', '外弦'],
@@ -515,20 +541,18 @@ var InOutSideEditor = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    window.addEventListener('keyup', function (e) {
-      switch (e.which) {
-        case 85: // U
-          this.onClick(0);
-          break;
-        case 73: // I
-          this.onClick(1);
-          break;
-        case 79: // O
-          this.onClick(2);
-          break;
-      }
-    }.bind(this), false);
+  keyboardEvent: function (e) {
+    switch (e.which) {
+      case 85: // U
+        this.onClick(0);
+        break;
+      case 73: // I
+        this.onClick(1);
+        break;
+      case 79: // O
+        this.onClick(2);
+        break;
+    }
   },
 
   onClick: function (i) {
@@ -557,6 +581,9 @@ var InOutSideEditor = React.createClass({
   },
 
   render: function () {
+
+    var tip = (this.props.keyboardEnable ? 'tip ' : '');
+
     return (
       <fieldset ref="fieldset">
         <legend>內外弦</legend>
@@ -566,7 +593,7 @@ var InOutSideEditor = React.createClass({
             if (fingerStr !== '無') {
               fingerStr += '弦';
             }
-            return <span className={ 'tip selection' + (i === this.props.text.indexOf(fingerStr) ? ' selected' : '') }
+            return <span className={ tip + 'selection' + (i === this.props.text.indexOf(fingerStr) ? ' selected' : '') }
                          onClick={this.onClick.bind(this, i)}
                          data-tip={this.props.tip[i]}>{text}</span>;
           })
@@ -591,6 +618,8 @@ var InOutSideEditor = React.createClass({
 
 var PitchEditor = React.createClass({
 
+  mixins: [KeyboardEventMixin],
+
   getDefaultProps: function () {
     return {
       items: ['normal', '8vb', '8va', '15ma'],
@@ -604,23 +633,21 @@ var PitchEditor = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    window.addEventListener('keyup', function (e) {
-      switch (e.which) {
-        case 65: // A
-          this.onClick(0);
-          break;
-        case 83: // S
-          this.onClick(1);
-          break;
-        case 68: // D
-          this.onClick(2);
-          break;
-        case 70: // F
-          this.onClick(3);
-          break;
-      }
-    }.bind(this), false);
+  keyboardEvent: function (e) {
+    switch (e.which) {
+      case 65: // A
+        this.onClick(0);
+        break;
+      case 83: // S
+        this.onClick(1);
+        break;
+      case 68: // D
+        this.onClick(2);
+        break;
+      case 70: // F
+        this.onClick(3);
+        break;
+    }
   },
 
   onClick: function (i) {
@@ -628,6 +655,9 @@ var PitchEditor = React.createClass({
   },
 
   render: function () {
+
+    var tip = (this.props.keyboardEnable ? 'tip ' : '');
+
     return (
       <fieldset>
         <legend>音高</legend>
@@ -635,14 +665,14 @@ var PitchEditor = React.createClass({
           this.props.items.map((text, i) => {
             var viewText;
             if (i === 0) {
-              return <span className={ 'tip selection' + (text === this.props.value ? ' selected' : '') }
+              return <span className={ tip + 'selection' + (text === this.props.value ? ' selected' : '') }
                            onClick={this.onClick.bind(this, i)}
                            data-tip={this.props.tip[i]}>
                        {this.props.itemMapping[text]}
                      </span>;
             } else {
               var itemObj = this.props.itemMapping[text];
-              return <span className={ 'tip selection' + (text === this.props.value ? ' selected' : '') }
+              return <span className={ tip + 'selection' + (text === this.props.value ? ' selected' : '') }
                            onClick={this.onClick.bind(this, i)}
                            data-tip={this.props.tip[i]}>
                        {itemObj.number}
@@ -659,6 +689,8 @@ var PitchEditor = React.createClass({
 
 var NoteValueEditor = React.createClass({
 
+  mixins: [KeyboardEventMixin],
+
   getDefaultProps: function () {
     return {
       items: [
@@ -672,26 +704,24 @@ var NoteValueEditor = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    window.addEventListener('keyup', function (e) {
-      switch (e.which) {
-        case 71: // G
-          this.onClick(0);
-          break;
-        case 72: // H
-          this.onClick(1);
-          break;
-        case 74: // J
-          this.onClick(2);
-          break;
-        case 75: // K
-          this.onClick(3);
-          break;
-        case 76: // L
-          this.onClick(4);
-          break;
-      }
-    }.bind(this), false);
+  keyboardEvent: function (e) {
+    switch (e.which) {
+      case 71: // G
+        this.onClick(0);
+        break;
+      case 72: // H
+        this.onClick(1);
+        break;
+      case 74: // J
+        this.onClick(2);
+        break;
+      case 75: // K
+        this.onClick(3);
+        break;
+      case 76: // L
+        this.onClick(4);
+        break;
+    }
   },
 
   onClick: function (i) {
@@ -699,12 +729,15 @@ var NoteValueEditor = React.createClass({
   },
 
   render: function () {
+
+    var tip = (this.props.keyboardEnable ? 'tip ' : '');
+
     return (
       <fieldset>
         <legend>音符時值</legend>
         {
           this.props.items.map((item, i) => {
-            return <span className={ 'tip selection' + (item.value === this.props.value ? ' selected' : '') }
+            return <span className={ tip + 'selection' + (item.value === this.props.value ? ' selected' : '') }
                          onClick={this.onClick.bind(this, i)}
                          data-tip={this.props.tip[i]}>{item.text}</span>;
           })
@@ -717,10 +750,39 @@ var NoteValueEditor = React.createClass({
 
 var FortePianoEditor = React.createClass({
 
+  mixins: [KeyboardEventMixin],
+
   getDefaultProps: function () {
     return {
-      text: ['正常', 'p', 'mp', 'pp', 'f', 'mf', 'ff']
+      text: ['正常', 'p', 'mp', 'pp', 'f', 'mf', 'ff'],
+      tip: ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
     };
+  },
+
+  keyboardEvent: function (e) {
+    switch (e.which) {
+      case 90: // Z
+        this.onClick(0);
+        break;
+      case 88: // X
+        this.onClick(1);
+        break;
+      case 67: // C
+        this.onClick(2);
+        break;
+      case 86: // V
+        this.onClick(3);
+        break;
+      case 66: // B
+        this.onClick(4);
+        break;
+      case 78: // N
+        this.onClick(3);
+        break;
+      case 77: // M
+        this.onClick(4);
+        break;
+    }
   },
 
   getInitialState: function () {
@@ -734,13 +796,17 @@ var FortePianoEditor = React.createClass({
   },
 
   render: function () {
+
+    var tip = (this.props.keyboardEnable ? 'tip ' : '');
+
     return (
       <fieldset>
         <legend>強弱</legend>
         {
           this.props.text.map((text, i) => {
-            return <span className={ 'selection' + (i === this.state.selected ? ' selected' : '') }
-                         onClick={this.onClick.bind(this, i)}>{text}</span>;
+            return <span className={ tip +'selection' + (i === this.state.selected ? ' selected' : '') }
+                         onClick={this.onClick.bind(this, i)}
+                         data-tip={this.props.tip[i]}>{text}</span>;
           })
         }
       </fieldset>
@@ -827,12 +893,20 @@ var ContinuousBowEditor = React.createClass({
     this.props.onContinuousBowChange(event.target.value);
   },
 
+  onFocus: function (event) {
+    this.props.onKeyboardEnable(false);
+  },
+
+  onBlur: function (event) {
+    this.props.onKeyboardEnable(true);
+  },
+
   render: function() {
     return (
       <fieldset ref="fieldset">
         <legend>連弓</legend>
         <span>長度：</span>
-        <input value={this.props.value} onChange={this.onChange}></input>
+        <input value={this.props.value} onChange={this.onChange} onFocus={this.onFocus} onBlur={this.onBlur}></input>
         <span> pixel</span>
       </fieldset>
     );
@@ -876,6 +950,8 @@ var AccidentalEditor = React.createClass({
 
 var RightOfNumberEditor = React.createClass({
 
+  mixins: [KeyboardEventMixin],
+
   getDefaultProps: function () {
     return {
       text: ['無', '附點', '空白'],
@@ -883,20 +959,18 @@ var RightOfNumberEditor = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    window.addEventListener('keyup', function (e) {
-      switch (e.which) {
-        case 188: // ,
-          this.onClick(0);
-          break;
-        case 190: // .
-          this.onClick(1);
-          break;
-        case 32: // space
-          this.onClick(2);
-          break;
-      }
-    }.bind(this), false);
+  keyboardEvent: function (e) {
+    switch (e.which) {
+      case 188: // ,
+        this.onClick(0);
+        break;
+      case 190: // .
+        this.onClick(1);
+        break;
+      case 32: // space
+        this.onClick(2);
+        break;
+    }
   },
 
   onClick: function (i) {
@@ -921,12 +995,15 @@ var RightOfNumberEditor = React.createClass({
   },
 
   render: function () {
+
+    var tip = (this.props.keyboardEnable ? 'tip ' : '');
+
     return (
       <fieldset>
         <legend>右邊</legend>
         {
           this.props.text.map((text, i) => {
-            return <span className={ 'tip selection' + (i === this.whichIndex(this.props.value) ? ' selected' : '') }
+            return <span className={ tip + 'selection' + (i === this.whichIndex(this.props.value) ? ' selected' : '') }
                          onClick={this.onClick.bind(this, i)}
                          data-tip={this.props.tip[i]}>{text}</span>;
           })
@@ -1013,7 +1090,8 @@ var EditPanel = React.createClass({
               sections: sections,
               editSection: sectionIndex,
               editBeat: beatIndex,
-              editNote: noteIndex
+              editNote: noteIndex,
+              keyboard: true
             };
           }
 
@@ -1101,6 +1179,12 @@ var EditPanel = React.createClass({
     }, []);
     ReactDOM.render(<NumberedMusicalNotation rows={rows} />,
             document.querySelector('.container'));
+  },
+
+  onKeyboardEnable: function (isEnable) {
+    this.setState({
+      keyboard: isEnable
+    });
   },
 
   setEditNoteValue: function(property, value) {
@@ -1397,17 +1481,17 @@ var EditPanel = React.createClass({
     var note = this.state.sections[this.state.editSection].beats[this.state.editBeat].notes[this.state.editNote];
     return (
       <div>
-        <MusicalNoteEditor value={note.note} onMusicalNoteChange={this.onMusicalNoteChange} />
-        <FingerMethodEditor value={note.finger} onFingerMethodChange={this.onFingerMethodChange} />
-        <BowingEditor value={note.bowing} onBowingChange={this.onBowingChange} />
-        <InOutSideEditor value={note.inOut} onInOutChange={this.onInOutChange} />
-        <PitchEditor value={note.pitch} onPitchChange={this.onPitchChange} />
-        <NoteValueEditor value={note.value} onNoteValueChange={this.onNoteValueChange} />
+        <MusicalNoteEditor value={note.note} onMusicalNoteChange={this.onMusicalNoteChange} keyboardEnable={this.state.keyboard} />
+        <FingerMethodEditor value={note.finger} onFingerMethodChange={this.onFingerMethodChange} keyboardEnable={this.state.keyboard} />
+        <BowingEditor value={note.bowing} onBowingChange={this.onBowingChange} keyboardEnable={this.state.keyboard} />
+        <InOutSideEditor value={note.inOut} onInOutChange={this.onInOutChange} keyboardEnable={this.state.keyboard} />
+        <PitchEditor value={note.pitch} onPitchChange={this.onPitchChange} keyboardEnable={this.state.keyboard} />
+        <NoteValueEditor value={note.value} onNoteValueChange={this.onNoteValueChange} keyboardEnable={this.state.keyboard} />
         <FortePianoEditor />
         <SpecialSignEditor value={note.specialSign} onSpecialSignChange={this.onSpecialSignChange} />
-        <ContinuousBowEditor value={note.continuousBowPixel} onContinuousBowChange={this.onContinuousBowChange} />
+        <ContinuousBowEditor value={note.continuousBowPixel} onContinuousBowChange={this.onContinuousBowChange} onKeyboardEnable={this.onKeyboardEnable} />
         <AccidentalEditor />
-        <RightOfNumberEditor value={note.right} onRightOfNoteChange={this.onRightOfNoteChange} />
+        <RightOfNumberEditor value={note.right} onRightOfNoteChange={this.onRightOfNoteChange} keyboardEnable={this.state.keyboard} />
         <Pager onPrevBeatClick={this.onPrevBeatClick}
                onNextBeatClick={this.onNextBeatClick}
                onPrevNoteClick={this.onPrevNoteClick}

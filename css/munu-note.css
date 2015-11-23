@@ -748,13 +748,14 @@ input.form-control {
 .edit-panel .tip::after {
   content: attr(data-tip);
   width: 16px;
-  color: #fff;
-  font-size: 16px;
-  border: 1px dashed white;
+  height: 20px;
+  color: rgba(179, 119, 0, 1);
+  font-size: 14px;
+  border: 1px dashed rgba(179, 119, 0, 1);
   border-bottom: none;
   position: absolute;
   right: 0px;
-  top: -24px;
+  top: -22px;
 }
 
 .edit-panel input {

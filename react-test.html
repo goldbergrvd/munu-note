@@ -32,5 +32,60 @@
   <script src="https://fb.me/react-0.14.0.js"></script>
   <script src="https://fb.me/react-dom-0.14.0.js"></script>
   <script src="js/app.js"></script>
+  <script>
+
+    (function () {
+      var editPanel = document.querySelector('.edit-panel');
+      var container = document.querySelector('.container');
+
+      var editPanelHeightPercentage = 50,
+          containerHeightPercentage = 50,
+          intervalId;
+
+      window.addEventListener('keyup', function (e) {
+
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+        switch (e.which) {
+          case 38: // 上
+            editPanel.style.display = 'block';
+            editPanel.style.height = editPanelHeightPercentage + '%';
+            container.classList.add('musical-note');
+            container.style.height = containerHeightPercentage + '%';
+            intervalId = setInterval(function () {
+              editPanelHeightPercentage += 2;
+              containerHeightPercentage -= 2;
+              if (editPanelHeightPercentage >= 50) {
+                clearInterval(intervalId);
+                intervalId = undefined;
+                editPanel.removeAttribute('style');
+                container.removeAttribute('style');
+              } else {
+                editPanel.style.height = editPanelHeightPercentage + '%';
+                container.style.height = containerHeightPercentage + '%';
+              }
+            }, 1);
+            break;
+          case 40: // 下
+            intervalId = setInterval(function () {
+              editPanelHeightPercentage -= 2;
+              containerHeightPercentage += 2;
+              if (editPanelHeightPercentage <= 0) {
+                editPanel.style.display = 'none';
+                clearInterval(intervalId);
+                intervalId = undefined;
+                container.classList.remove('musical-note');
+              } else {
+                editPanel.style.height = editPanelHeightPercentage + '%';
+                container.style.height = containerHeightPercentage + '%';
+              }
+            }, 1);
+            break;
+        }
+      }, false);
+    } ());
+
+  </script>
 </body>
 </html>
