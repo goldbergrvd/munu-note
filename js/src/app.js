@@ -287,11 +287,11 @@ var NumberedMusicalNotation = React.createClass({
 });
 
 var KeyboardEventMixin = {
-  componentDidMount: function() {
+  componentDidMount: function () {
     window.addEventListener('keyup', this.keyboardEvent, false);
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function (nextProps) {
     if (nextProps.keyboardEnable) {
       window.addEventListener('keyup', this.keyboardEvent, false);
     } else {
@@ -855,7 +855,7 @@ var SpecialSignEditor = React.createClass({
     });
   },
 
-  render: function() {
+  render: function () {
     return (
       <fieldset ref="fieldset">
         <legend>特別記號</legend>
@@ -901,7 +901,7 @@ var ContinuousBowEditor = React.createClass({
     this.props.onKeyboardEnable(true);
   },
 
-  render: function() {
+  render: function () {
     return (
       <fieldset ref="fieldset">
         <legend>連弓</legend>
@@ -1036,7 +1036,11 @@ var Pager = React.createClass({
     this.props.onDeleteClick();
   },
 
-  render: function() {
+  onSaveClick: function () {
+    this.props.onSaveClick();
+  },
+
+  render: function () {
     return (
       <div>
         <span className="selection" onClick={this.onPrevBeatClick}>上一拍</span>
@@ -1044,6 +1048,7 @@ var Pager = React.createClass({
         <span className="selection" onClick={this.onNextNoteClick}>下一符</span>
         <span className="selection" onClick={this.onNextBeatClick}>下一拍</span>
         <span className="selection" onClick={this.onDeleteClick}>刪除</span>
+        <span className="selection" onClick={this.onSaveClick}>儲存</span>
         <span style={{marginLeft: 30}}>段：{this.props.section}</span>
         <span style={{marginLeft: 30}}>拍：{this.props.beat}</span>
         <span style={{marginLeft: 30}}>符：{this.props.note}</span>
@@ -1056,13 +1061,13 @@ var Pager = React.createClass({
 
 var EditPanel = React.createClass({
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       sectionsPerRow: 6
     };
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
 
     var sections = this.props.sections;
 
@@ -1098,73 +1103,59 @@ var EditPanel = React.createClass({
         }
       }
     }
+
+    return {
+      sections: sections,
+      editSection: 0,
+      editBeat: 0,
+      editNote: 0,
+      keyboard: true
+    };
   },
 
-  componentDidMount: function() {
-    window.addEventListener('keyup', function (e) {
-      console.log(e.which);
-      switch (e.which) {
-        case 37: // 左
-          if (e.altKey) {
-            this.onPrevBeatClick();
-          } else {
-            this.onPrevNoteClick();
-          }
-          break;
-        case 39: // 右
-          if (e.altKey) {
-            this.onNextBeatClick();
-          } else {
-            this.onNextNoteClick();
-          }
-          break;
-        case 38: // 上
-          this.onPrevLineClick();
-          break;
-        case 40: // 下
-          this.onNextLineClick();
-          break;
-        case 8:
-          this.onDeleteClick();
-          break;
-        // case 48: // 0
-        // case 49: // 1
-        // case 50: // 2
-        // case 51: // 3
-        // case 52: // 4
-        // case 53: // 5
-        // case 54: // 6
-        // case 55: // 7
-        //   this.onMusicalNoteChange('' + (e.which - 48));
-        //   break;
-        // case 192: // ~
-        //   this.onMusicalNoteChange('無');
-        //   break;
-        // case 189: // -
-        //   this.onMusicalNoteChange('—');
-        //   break;
-        // case 190: // .
-        //   this.onRightOfNoteChange('.');
-        //   break;
-        // case 32: // space
-        //   this.onRightOfNoteChange(' ');
-        //   break;
-        case 67: // c
-          if (e.ctrlKey) {
-            if (e.altKey) {
-              this.onCopyPrevSection();
-            } else {
-              this.onCopyPrevBeat();
-            }
-          }
-          break;
-        case 27: // esc
-          console.log(JSON.stringify(this.state.sections));
-          break;
-      }
-    }.bind(this), false);
-
+  componentDidMount: function () {
+    window.addEventListener('keyup', this.keyboardEvent, false);
     this.renderMusicalNote();
+  },
+
+  keyboardEvent: function (e) {
+    switch (e.which) {
+      case 37: // 左
+        if (e.altKey) {
+          this.onPrevBeatClick();
+        } else {
+          this.onPrevNoteClick();
+        }
+        break;
+      case 39: // 右
+        if (e.altKey) {
+          this.onNextBeatClick();
+        } else {
+          this.onNextNoteClick();
+        }
+        break;
+      case 38: // 上
+        this.onPrevLineClick();
+        break;
+      case 40: // 下
+        this.onNextLineClick();
+        break;
+      case 8:
+        this.onDeleteClick();
+        break;
+      case 67: // c
+        if (e.ctrlKey) {
+          if (e.altKey) {
+            this.onCopyPrevSection();
+          } else {
+            this.onCopyPrevBeat();
+          }
+        }
+        break;
+      case 27: // esc
+        console.log(JSON.stringify(this.state.sections));
+        break;
+    }
   },
 
   renderMusicalNote: function () {
@@ -1182,12 +1173,18 @@ var EditPanel = React.createClass({
   },
 
   onKeyboardEnable: function (isEnable) {
+    if (isEnable) {
+      window.addEventListener('keyup', this.keyboardEvent, false);
+    } else {
+      window.removeEventListener('keyup', this.keyboardEvent);
+    }
+
     this.setState({
       keyboard: isEnable
     });
   },
 
-  setEditNoteValue: function(property, value) {
+  setEditNoteValue: function (property, value) {
     console.log(property + ': ' + (value.tip ? value.tip + '-' + value.offset : value));
     var newSections = this.state.sections;
     if (property === 'right') {
@@ -1421,6 +1418,21 @@ var EditPanel = React.createClass({
     this.renderMusicalNote();
   },
 
+  onSaveClick: function () {
+    $.ajax({
+      url: 'score/' + scoreId,
+      type: 'PUT',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        title: '賽馬',
+        sections: this.state.sections
+      })
+    })
+    .done((data) => {
+      console.log(data);
+    });
+  },
+
   onCopyPrevBeat: function () {
     console.log('copy prev beat: section<' + this.state.editSection + '> beat<' + this.state.editBeat + '> note<' + this.state.editNote + '>');
     var newSections = this.state.sections;
@@ -1497,6 +1509,7 @@ var EditPanel = React.createClass({
                onPrevNoteClick={this.onPrevNoteClick}
                onNextNoteClick={this.onNextNoteClick}
                onDeleteClick={this.onDeleteClick}
+               onSaveClick={this.onSaveClick}
                section={this.state.editSection + 1}
                beat={this.state.editBeat + 1}
                note={this.state.editNote + 1} />
@@ -1530,8 +1543,84 @@ function Note() {
   this.editing = true;
 }
 
-var sections = [];
+var NoteList = React.createClass({
+
+  getDefaultProps: function () {
+    return {
+      musicGroups: [
+        {
+          groupName: '二胡獨奏曲',
+          musics: [
+            { id: '1', name: '賽馬' },
+            { id: '2', name: '二泉映月' },
+            { id: '3', name: '子弟兵與老百姓' }
+          ]
+        },
+        {
+          groupName: '動畫主題曲',
+          musics: [
+            { id: '4', name: 'Let it go' },
+            { id: '5', name: '残酷な天使のテーゼ' }
+          ]
+        },
+      ]
+    };
+  },
+
+  getInitialState: function () {
+    return {
+      open: false
+    };
+  },
+
+  toggle: function () {
+    this.setState({
+      open: !this.state.open
+    });
+  },
+
+  render: function () {
+    var noteListStyle = {
+      left: (this.state.open ? 0 : -300)
+    };
+
+    return (
+      <div id="note-list" style={noteListStyle}>
+        <span className="note-list-toggle" onClick={this.toggle}>曲譜</span>
+        <ul className="group-list">
+        {
+          this.props.musicGroups.map((musicGroup) => {
+            return (<li className="group">
+                      <a href="#" className="group-name">{musicGroup.groupName}</a>
+                      <ul className="music-list">
+                        {
+                           musicGroup.musics.map((music) => {
+                             return <li className="music"><a href="#" className="music-name">{music.name}</a></li>
+                           })
+                        }
+                      </ul>
+                    </li>);
+          })
+        }
+        </ul>
+      </div>
+    );
+  }
+
+});
+
+
+// var sections = [];
 // var sections = [{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"3"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"3"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"3"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"3"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"6"},{"note":"5"},{"note":"3"},{"note":"5"}]},{"notes":[{"note":"6"},{"note":"5"},{"note":"3"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"6"},{"note":"5"},{"note":"3"},{"note":"5"}]},{"notes":[{"note":"6"},{"note":"5"},{"note":"3"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"6","right":" "},{"note":"6"}]},{"notes":[{"note":"6","right":" "},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"6","right":" "},{"note":"6"}]},{"notes":[{"note":"6","right":" "},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"6","right":" "},{"note":"3"}]},{"notes":[{"note":"1","right":" "},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"3","right":" "},{"note":"6"}]},{"notes":[{"note":"5","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]},{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]},{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"6","right":" "},{"note":"3"}]},{"notes":[{"note":"1","right":" "},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"3","right":" "},{"note":"6"}]},{"notes":[{"note":"5","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]},{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]},{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"2","right":"."}]},{"notes":[{"note":"6"},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"2","right":"."}]},{"notes":[{"note":"6"},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"2","right":"."}]},{"notes":[{"note":"6"},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"2","right":"."}]},{"notes":[{"note":"6"},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]},{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]},{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"2","right":" "},{"note":"2"}]},{"notes":[{"note":"2","right":" "},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"2","right":" "},{"note":"2"}]},{"notes":[{"note":"2","right":" "},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"6"}]}]},{"beats":[{"notes":[{"note":"5"}]},{"notes":[{"note":"3"}]}]},{"beats":[{"notes":[{"note":"2"}]},{"notes":[{"note":"5"}]}]},{"beats":[{"notes":[{"note":"3"}]},{"notes":[{"note":"1"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"6"}]}]},{"beats":[{"notes":[{"note":"5"}]},{"notes":[{"note":"3"}]}]},{"beats":[{"notes":[{"note":"2"}]},{"notes":[{"note":"5"}]}]},{"beats":[{"notes":[{"note":"3"}]},{"notes":[{"note":"1"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"6"},{"note":"2"},{"note":"1"},{"note":"2"}]},{"notes":[{"note":"6"},{"note":"2"},{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"6"},{"note":"2"},{"note":"1"},{"note":"2"}]},{"notes":[{"note":"6"},{"note":"2"},{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"6","right":" "},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"—"}]}]},{"beats":[{"notes":[{"note":"3"}]},{"notes":[{"note":"6","right":"."},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"5","right":"."}]},{"notes":[{"note":"3"}]}]},{"beats":[{"notes":[{"note":"5","right":" "},{"note":"6"}]},{"notes":[{"note":"1"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"—"}]}]},{"beats":[{"notes":[{"note":"3"}]},{"notes":[{"note":"6","right":"."},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"5"}]},{"notes":[{"note":"5","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"2","right":" "},{"note":"3"}]},{"notes":[{"note":"6","right":" "},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"3"}]},{"notes":[{"note":"—"}]}]},{"beats":[{"notes":[{"note":"5"}]},{"notes":[{"note":"6","right":"."},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"1","right":"."}]},{"notes":[{"note":"6"}]}]},{"beats":[{"notes":[{"note":"2","right":" "},{"note":"3"}]},{"notes":[{"note":"6","right":" "},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"3"}]},{"notes":[{"note":"3","right":" "},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"1","right":"."},{"note":"2"}]},{"notes":[{"note":"3","right":" "},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"6"}]}]},{"beats":[{"notes":[{"note":"2","right":" "},{"note":"3"}]},{"notes":[{"note":"1"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"—"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"3"},{"note":"3"}]},{"notes":[{"note":"6","right":" "},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"5"},{"note":"5"},{"note":"5"}]},{"notes":[{"note":"5","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"5"},{"note":"5"},{"note":"6"}]},{"notes":[{"note":"1"},{"note":"2"},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"6"},{"note":"6"},{"note":"6"}]},{"notes":[{"note":"6","right":" "},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"3"},{"note":"3"}]},{"notes":[{"note":"6","right":" "},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"5"},{"note":"5"},{"note":"5"}]},{"notes":[{"note":"5","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"2"},{"note":"2"},{"note":"3"}]},{"notes":[{"note":"6","right":" "},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"3"},{"note":"5"}]},{"notes":[{"note":"3","right":" "},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"5"},{"note":"5"},{"note":"5"}]},{"notes":[{"note":"6","right":" "},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"1"},{"note":"1"},{"note":"1"}]},{"notes":[{"note":"1","right":" "},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"2"},{"note":"2"},{"note":"3"}]},{"notes":[{"note":"6","right":" "},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"3"},{"note":"5"}]},{"notes":[{"note":"3","right":" "},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"1"},{"note":"6"},{"note":"1"},{"note":"2"}]},{"notes":[{"note":"3"},{"note":"2"},{"note":"3"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"6"},{"note":"5"},{"note":"6"},{"note":"1"}]},{"notes":[{"note":"5"},{"note":"6"},{"note":"5"},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"2"},{"note":"3"},{"note":"2"},{"note":"1"}]},{"notes":[{"note":"2"},{"note":"1"},{"note":"6"},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"6"}]}]},{"beats":[{"notes":[{"note":"0","right":" "},{"note":"6"}]},{"notes":[{"note":"1","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"0","right":" "},{"note":"6"}]},{"notes":[{"note":"1","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"0","right":" "},{"note":"2"}]},{"notes":[{"note":"7","right":" "},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"6","right":" "},{"note":"3"}]},{"notes":[{"note":"1","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"0","right":" "},{"note":"6"}]},{"notes":[{"note":"1","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"0","right":" "},{"note":"6"}]},{"notes":[{"note":"1","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"0","right":" "},{"note":"2"}]},{"notes":[{"note":"7","right":" "},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"6","right":" "},{"note":"3"}]},{"notes":[{"note":"1","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"0","right":" "},{"note":"6"}]},{"notes":[{"note":"1","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"0","right":" "},{"note":"6"}]},{"notes":[{"note":"1","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"0","right":" "},{"note":"2"}]},{"notes":[{"note":"7","right":" "},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"6","right":" "},{"note":"3"}]},{"notes":[{"note":"1","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"0","right":" "},{"note":"5"}]},{"notes":[{"note":"3","right":" "},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"1","right":" "},{"note":"2"}]},{"notes":[{"note":"1","right":" "},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"2","right":" "},{"note":"2"}]},{"notes":[{"note":"3","right":" "},{"note":"1"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"3"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"3"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"3"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"3"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"2"},{"note":"3"},{"note":"5"}]},{"notes":[{"note":"6"},{"note":"1"},{"note":"6"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"2"},{"note":"3"},{"note":"5"}]},{"notes":[{"note":"6"},{"note":"1"},{"note":"6"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"5"},{"note":"3"},{"note":"2"}]},{"notes":[{"note":"1","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"2"},{"note":"3"},{"note":"5"}]},{"notes":[{"note":"6"},{"note":"1"},{"note":"6"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"2"},{"note":"3"},{"note":"5"}]},{"notes":[{"note":"6"},{"note":"1"},{"note":"6"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"5"},{"note":"3"},{"note":"2"}]},{"notes":[{"note":"1","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"6","right":"."}]},{"notes":[{"note":"3"},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"1","right":" "},{"note":"6"}]},{"notes":[{"note":"6","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"1","right":" "},{"note":"6"}]},{"notes":[{"note":"6","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"1","right":" "},{"note":"6"}]},{"notes":[{"note":"6","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"1","right":" "},{"note":"6"}]},{"notes":[{"note":"6","right":" "},{"note":"3"}]}]},{"beats":[{"notes":[{"note":"1"},{"note":"6"},{"note":"1"}]},{"notes":[{"note":"2"},{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"2"},{"note":"3"}]},{"notes":[{"note":"5"},{"note":"3"},{"note":"5"}]}]},{"beats":[{"notes":[{"note":"5"},{"note":"3"},{"note":"5"}]},{"notes":[{"note":"6"},{"note":"5"},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"1"},{"note":"6"},{"note":"1"}]},{"notes":[{"note":"2"},{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"2"},{"note":"1"},{"note":"2"}]},{"notes":[{"note":"3"},{"note":"2"},{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"2"},{"note":"1"},{"note":"2"}]},{"notes":[{"note":"3"},{"note":"2"},{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"2"},{"note":"1"},{"note":"2"}]},{"notes":[{"note":"3"},{"note":"2"},{"note":"1"},{"note":"2"}]}]},{"beats":[{"notes":[{"note":"3"},{"note":"2"},{"note":"1"},{"note":"2"}]},{"notes":[{"note":"3"},{"note":"2"},{"note":"5"},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"—"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"—"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"—"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"0"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"6","right":" "},{"note":"6"}]}]},{"beats":[{"notes":[{"note":"6"}]},{"notes":[{"note":"—","editing":true}]}]}];
 // var sections = [{"beats":[{"notes":[{"note":"6","finger":{"tip":"二","offset":"4"},"bowing":{"tip":"pull","offset":"6"},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"3","finger":{"tip":"０","offset":"4"},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"一","offset":"4"},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":"6"},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"pull","offset":"3"},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":"6"},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]},{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]},{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]},{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]},{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]},{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]},{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"—","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":"."},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]},{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"—","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":"."},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"—","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":"."},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"right":"."}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":"."},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]},{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"—","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8,"right":" "},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":8}]}]},{"beats":[{"notes":[{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"5","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"3","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]},{"notes":[{"note":"2","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16},{"note":"1","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":16}]}]},{"beats":[{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]},{"notes":[{"note":"6","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4}]}]},{"beats":[{"notes":[{"note":"0","finger":{"tip":"","offset":1},"bowing":{"tip":"","offset":1},"inOut":{"tip":"","offset":1},"value":4,"editing":true}]}]}];
+var scoreId = '20151124235456781';
 
-ReactDOM.render(<EditPanel sections={sections} />, document.querySelector('.edit-panel'));
+$.ajax({
+  url: 'score/' + scoreId,
+  type: 'GET'
+})
+.done(function (data) {
+  ReactDOM.render(<EditPanel sections={data.sections} />, document.querySelector('.edit-panel'));
+});
+
+ReactDOM.render(<NoteList />, document.querySelector('#note-list-container'));

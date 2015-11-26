@@ -205,15 +205,18 @@
 }
 
 
-#note-list > ul {
+/*#note-list > ul {*/
+#note-list ul.group-list {
   height: 95%;
   padding-top: 20px;
   overflow: scroll;
 }
-#note-list > ul > li {
+/*#note-list > ul > li {*/
+#note-list li.group {
   padding: 5px 0;
 }
-#note-list > ul > li > ul > li {
+/*#note-list > ul > li > ul > li {*/
+#note-list li.music {
   padding: 2px 0;
 }
 #note-list ul {
@@ -232,27 +235,36 @@
   text-decoration: none;
 }
 
-#note-list > ul > li > a {
-  color: #405659;
+/*#note-list > ul > li > a {*/
+#note-list a.group-name {
+  /*color: #405659;*/
+  color: rgba(51, 214, 255, 1);
 }
-#note-list > ul > li > a:hover {
-  color: #6A8D9E;
+/*#note-list > ul > li > a:hover {*/
+#note-list a.group-name:hover {
+  /*color: #6A8D9E;*/
+  /*color: rgba(51, 214, 255, 1);*/
+  background: rgba(255, 255, 255, 0.3);
 }
 
-#note-list > ul > li > ul > li > a {
-  color: #9A9A9A;
-}
-#note-list > ul > li > ul > li > a:hover {
+/*#note-list > ul > li > ul > li > a {*/
+#note-list a.music-name {
+  /*color: #9A9A9A;*/
   color: #fff;
 }
+/*#note-list > ul > li > ul > li > a:hover {*/
+#note-list a.music-name:hover {
+  /*color: #fff;*/
+  background: rgba(255, 255, 255, 0.3);
+}
 
-#note-list > ul::-webkit-scrollbar {
+#note-list ul.group-list::-webkit-scrollbar {
   width: 0.5em;
 }
-#note-list > ul::-webkit-scrollbar-thumb {
+#note-list ul.group-list::-webkit-scrollbar-thumb {
   background-color: #9DCFE1;
   border-radius: 5px;
 }
-#note-list > ul::-webkit-scrollbar-corner {
+#note-list ul.group-list::-webkit-scrollbar-corner {
   background-color: transparent;
 }
