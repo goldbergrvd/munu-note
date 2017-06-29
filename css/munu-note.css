@@ -155,8 +155,8 @@
   text-align: center;
   display: inline-block;
   position: relative;
-  /*margin: 0 -3px;  html 寫死要這樣 */
-  margin: 0 4px; /* React render 要這樣 */
+  margin: 0 -3px; /* html 寫死要這樣 */
+  /*margin: 0 4px;  React render 要這樣 */
 }
 .beat-5n-1d { left: -13px; }
 
